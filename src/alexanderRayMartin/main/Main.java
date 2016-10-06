@@ -3,7 +3,7 @@ package alexanderRayMartin.main;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Hello github! This is Alex!");
+		System.out.println("Hello github! This is Alex Martin!");
 	}
 
 }

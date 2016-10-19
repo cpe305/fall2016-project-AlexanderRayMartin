@@ -16,11 +16,4 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-  	<dependency>
-  		<groupId>de.westnordost</groupId>
-  		<artifactId>osmapi</artifactId>
-  		<version>1.2</version>
-  	</dependency>
-  </dependencies>
 </project>

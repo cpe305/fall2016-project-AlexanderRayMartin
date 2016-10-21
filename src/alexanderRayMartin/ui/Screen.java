@@ -4,21 +4,34 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class Screen {
+import alexanderRayMartin.util.Mouse;
 
-	public static final int WIDTH = 1000;
+public class Screen extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static final int WIDTH = 1500;
 	public static final int HEIGHT = WIDTH / 16 * 9;
 
-	public JFrame frame;
+	public Map map;
+	public Mouse mouse;
 
 	public Screen() {
-		frame = new JFrame("Poly Path");
-		frame.setVisible(true);
-		frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
-		frame.setLocationRelativeTo(null);
+		super("Poly Path");
+		map = new Map("src/map.png", 1, 0, 0);
+		mouse = new Mouse();
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+		add(map);
+		setVisible(true);
+		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 }

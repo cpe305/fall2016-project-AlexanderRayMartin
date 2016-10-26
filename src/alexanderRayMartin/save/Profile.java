@@ -7,8 +7,8 @@ public class Profile {
 	public Profile() {
 		schedule = new Schedule();
 	}
-	
-	public void addClass(int buildingNumber){
+
+	public void addClass(int buildingNumber) {
 		schedule.add(new Course(buildingNumber));
 	}
 }

@@ -1,5 +1,5 @@
 package alexanderRayMartin.searchAlgorithm;
 
-public class Building extends Node{
+public class Building extends Node {
 
 }

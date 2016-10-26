@@ -9,8 +9,8 @@ public class Schedule {
 	public Schedule() {
 		classes = new ArrayList<Course>();
 	}
-	
-	public void add(Course e){
+
+	public void add(Course e) {
 		classes.add(e);
 	}
 }

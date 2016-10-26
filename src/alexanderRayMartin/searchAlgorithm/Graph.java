@@ -8,7 +8,8 @@ public class Graph {
 	private int[][] adj;
 	private boolean[] visited;
 	private int numVertices;
-	private int rows, cols;
+	private int rows;
+	private int cols;
 
 	public Graph(int rows, int cols) { // graph constructor
 		this.rows = rows;
@@ -20,9 +21,11 @@ public class Graph {
 		numVertices = rows * cols;
 		visited = new boolean[numVertices];
 		adj = new int[numVertices][numVertices];
-		for (int y = 0; y < numVertices; y++)
-			for (int x = 0; x < numVertices; x++)
+		for (int y = 0; y < numVertices; y++) {
+			for (int x = 0; x < numVertices; x++) {
 				adj[y][x] = 0;
+			}
+		}
 	}
 
 	public int vertices() {

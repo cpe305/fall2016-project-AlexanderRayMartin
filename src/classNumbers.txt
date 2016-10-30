@@ -1,0 +1,22 @@
+1, Administration
+2, Cotchett Education
+3, Business
+4, Research Development Center
+5, Architecture & Environmental Design
+6, Christopher Cohan Performing Arts Center
+7, Advanced Technology Laboratories
+8, Bioresource & Agricultural Engineering
+8A, Bioresource & Agricultural Engineering Shop
+9, Farm Shop
+10, Alan A. Erhart Agriculture
+11, Agricultural Sciences
+13, Engineering
+14, Frank E. Pilling Computer Science
+15, Cal Poly Corporation Administration
+16, Beef Unit
+17, Crop Science
+18, Eugene & Rachel Boone Dairy Science Center
+18A, Dairy Products Technology Center
+19, Dining Complex
+19A, Sandwich Factory
+20, Engineering East

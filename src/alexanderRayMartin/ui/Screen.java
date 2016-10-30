@@ -2,85 +2,127 @@ package alexanderRayMartin.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import alexanderRayMartin.util.Mouse;
+import alexanderRayMartin.searchAlgorithm.Building;
 
 public class Screen extends JFrame {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static final int WIDTH = 1300;
-	public static final int HEIGHT = 1000;
+    public static final int UI_WIDTH = 400;
+    public static final int WIDTH = 1000 + UI_WIDTH;
+    public static final int HEIGHT = 1000;
 
-	public Map map;
-	public Mouse mouse;
+    public Map map;
 
-	private JPanel mainPanel;
-	private JPanel schedulePanel;
-	private JPanel savePanel;
+    private JPanel uiPanel;
+    private JPanel schedulePanel;
+    private JPanel savePanel;
 
-	private JTextField classOneName;
-	private JTextField classOneNumber;
+    private JButton addClass;
+    private JButton save;
 
-	private JTextField classTwoName;
-	private JTextField classTwoNumber;
+    private JComboBox<Building> selectClass;
 
-	private JTextField classThreeName;
-	private JTextField classThreeNumber;
+    private JLabel scheduleLabel;
 
-	private JTextField classFourName;
-	private JTextField classFourNumber;
+    private ButtonActionListener buttonListener;
+    private MouseEventListener mouseListener;
 
-	private JTextField classFiveName;
-	private JTextField classFiveNumber;
+    public Screen() {
+        super("Poly Path");
+        map = new Map("src/mapZoom.png", 1, 0, 0);
+        mouseListener = new MouseEventListener();
+        buttonListener = new ButtonActionListener();
+        buttonListener = new ButtonActionListener();
+        uiPanel = new JPanel();
+        uiPanel.setPreferredSize(new Dimension(UI_WIDTH, HEIGHT));
+        uiPanel.setLayout(new BoxLayout(uiPanel, BoxLayout.Y_AXIS));
+        addMouseListener(mouseListener);
+        add(uiPanel, BorderLayout.WEST);
+        add(map);
+        createInterface();
+        setVisible(true);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+    }
 
-	private JButton addClass;
-	private JButton save;
+    public void createInterface() {
+        Font buttonFont = new Font("Courier", Font.BOLD, 13);
+        Dimension buttonSize = new Dimension(125, 40);
 
-	public Screen() {
-		super("Poly Path");
-		map = new Map("src/mapZoom.png", 1, 300, 0);
-		mouse = new Mouse();
-		addMouseListener(mouse);
-		addMouseMotionListener(mouse);
-		add(map);
-		setVisible(true);
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
-		setLocationRelativeTo(null);
-		init();
-	}
+        schedulePanel = new JPanel();
+        savePanel = new JPanel();
+        uiPanel.add(schedulePanel);
+        uiPanel.add(savePanel);
 
-	public void init() {
-		mainPanel = new JPanel();
-		schedulePanel = new JPanel();
-		savePanel = new JPanel();
+        scheduleLabel = new JLabel("Schedule");
+        scheduleLabel.setFont(new Font("Courier", Font.BOLD, 50));
+        schedulePanel.add(scheduleLabel);
 
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		schedulePanel.setLayout(new BoxLayout(schedulePanel, BoxLayout.Y_AXIS));
-		savePanel.setLayout(new BoxLayout(savePanel, BoxLayout.Y_AXIS));
+        addClass = new JButton("Add");
+        addClass.setFont(buttonFont);
+        addClass.setPreferredSize(buttonSize);
+        addClass.addActionListener(buttonListener);
 
-		addClass = new JButton("Add");
-		save = new JButton("Save");
+        save = new JButton("Save");
+        save.setFont(buttonFont);
+        save.setPreferredSize(buttonSize);
+        save.addActionListener(buttonListener);
 
-		mainPanel.add(schedulePanel);
-		mainPanel.add(savePanel);
+        selectClass = new JComboBox<Building>(Building.buildings.toArray(new Building[Building.buildings.size()]));
+        selectClass.setFont(buttonFont);
+        selectClass.setMaximumRowCount(10);
+        schedulePanel.add(selectClass);
 
-		schedulePanel.add(addClass);
+        schedulePanel.add(addClass);
+        savePanel.add(save);
+    }
 
-		savePanel.add(save);
+    private class ButtonActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
 
-		mainPanel.add(schedulePanel, BorderLayout.LINE_START);
-		mainPanel.add(savePanel, BorderLayout.PAGE_END);
-		add(mainPanel);
-	}
+            Object source = event.getSource();
 
+            if (source == addClass) {
+                System.out.println("Adding class...");
+            } else if (source == save) {
+                System.out.println("Saving...");
+            }
+
+        }
+    }
+
+    private class MouseEventListener implements MouseListener {
+        public void mouseClicked(MouseEvent e) {
+        }
+
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        public void mouseExited(MouseEvent e) {
+        }
+    }
 }

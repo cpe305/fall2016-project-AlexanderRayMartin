@@ -18,10 +18,10 @@ public class Map extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private String fileName;
-	private int scale;
+	private double scale;
 	private int xOffset, yOffset;
 
-	public Map(String fileName, int scale, int xOffset, int yOffset) {
+	public Map(String fileName, double scale, int xOffset, int yOffset) {
 		this.fileName = fileName;
 		this.scale = scale;
 		this.xOffset = xOffset;

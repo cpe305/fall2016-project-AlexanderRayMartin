@@ -1,5 +1,10 @@
 package alexanderRayMartin.searchAlgorithm;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -11,13 +16,49 @@ public class Graph {
 	private int rows;
 	private int cols;
 
-	public Graph(int rows, int cols) { // graph constructor
+	/** Graph constructor */
+	public Graph(int rows, int cols) {
 		this.rows = rows;
 		this.cols = cols;
 		createAdj();
 	}
 
-	public void createAdj() { // creates the adj matrix
+	// TODO
+	/** Opens a file and returns a FileReader */
+	public static FileReader openFile(String file) {
+		FileReader fileReader = null;
+		try {
+			fileReader = new FileReader(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return fileReader;
+	}
+
+	/** Converts a file from a FileReader into an array */
+	public static int[] getArray(FileReader fileReader) {
+		ArrayList<Integer> arrayList = new ArrayList<Integer>();
+		int array[] = null;
+		String line;
+		String items[];
+		BufferedReader bufferedReader;
+		try {
+			bufferedReader = new BufferedReader(fileReader);
+			while ((line = bufferedReader.readLine()) != null) {
+				items = line.split(" ");
+				for (int i = 0; i < items.length; i++)
+					arrayList.add(Integer.parseInt(items[i].trim()));
+			}
+			array = arrayList.stream().mapToInt(i -> i).toArray();
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return array;
+	}
+
+	/** Creates the adjacency matrix */
+	public void createAdj() {
 		numVertices = rows * cols;
 		visited = new boolean[numVertices];
 		adj = new int[numVertices][numVertices];
@@ -32,10 +73,11 @@ public class Graph {
 		return numVertices;
 	}
 
-	public int[] getPath(int start, int stop) { // Finds shortest path
-		// this algorithm checks adjacent blocks
-		// and chooses the one with the shortest path
-		// to add to the array
+	/**
+	 * Finds the shortest path by checking adjacent blocks and choosing the one
+	 * with the shortest path to add to the array
+	 */
+	public int[] getPath(int start, int stop) {
 
 		int shortestPath = fewestEdgePath(start, stop);
 		if (shortestPath == -1)

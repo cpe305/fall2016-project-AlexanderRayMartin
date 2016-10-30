@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 import alexanderRayMartin.searchAlgorithm.Graph;
 
-public class Maze extends Applet {
+public class ShortestPathTest extends Applet {
 
 	private static final long serialVersionUID = 1L;
 

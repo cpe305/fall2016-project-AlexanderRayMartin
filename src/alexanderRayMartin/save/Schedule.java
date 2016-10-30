@@ -1,16 +1,43 @@
 package alexanderRayMartin.save;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Schedule {
+public class Schedule implements Serializable {
 
-	private ArrayList<Course> classes;
+	private static final long serialVersionUID = 1L;
+
+	private int classOneNumber;
+	private int classTwoNumber;
+	private int classThreeNumber;
+	private int classFourNumber;
+	private int classFiveNumber;
 
 	public Schedule() {
-		classes = new ArrayList<Course>();
+		classOneNumber = -1;
+		classTwoNumber = -1;
+		classThreeNumber = -1;
+		classFourNumber = -1;
+		classFiveNumber = -1;
 	}
 
-	public void add(Course e) {
-		classes.add(e);
+	public int getClassOneNumber() {
+		return classOneNumber;
 	}
+
+	public int getClassTwoNumber() {
+		return classTwoNumber;
+	}
+
+	public int getClassThreeNumber() {
+		return classThreeNumber;
+	}
+
+	public int getClassFourNumber() {
+		return classFourNumber;
+	}
+
+	public int getClassFiveNumber() {
+		return classFiveNumber;
+	}
+
 }

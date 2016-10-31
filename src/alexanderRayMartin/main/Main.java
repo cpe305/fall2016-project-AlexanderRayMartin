@@ -9,13 +9,19 @@ public class Main {
     public static void main(String[] args) {
         Building.getBuildings();
         new Screen();
-        Save save = new Save();
-        save.loadSchedule();
 
         // test loading buildings
         for (int i = 0; i < Building.buildings.size(); i++)
             System.out.println("Name: " + Building.buildings.get(i).name + " | Building Number: "
                     + Building.buildings.get(i).buildingNumber);
+
+        // test adding classes to schedule
+        System.out.println("\nSchedule size: " + Save.schedule.classes.size());
+
+        // TODO fix this possible synchronization error
+        for (int i = 0; i < Save.schedule.classes.size(); i++) {
+            System.out.println(Save.schedule.classes.get(i));
+        }
 
     }
 }

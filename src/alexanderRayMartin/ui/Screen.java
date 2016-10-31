@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import alexanderRayMartin.save.Save;
 import alexanderRayMartin.searchAlgorithm.Building;
 
 public class Screen extends JFrame {
@@ -88,9 +89,10 @@ public class Screen extends JFrame {
         selectClass = new JComboBox<Building>(Building.buildings.toArray(new Building[Building.buildings.size()]));
         selectClass.setFont(buttonFont);
         selectClass.setMaximumRowCount(10);
-        schedulePanel.add(selectClass);
 
+        schedulePanel.add(selectClass);
         schedulePanel.add(addClass);
+
         savePanel.add(save);
     }
 
@@ -100,9 +102,13 @@ public class Screen extends JFrame {
             Object source = event.getSource();
 
             if (source == addClass) {
-                System.out.println("Adding class...");
+                Save.schedule.classes.add((Building) selectClass.getSelectedItem());
+                System.out.println("Adding class: " + ((Building) selectClass.getSelectedItem()).buildingNumber + " "
+                        + ((Building) selectClass.getSelectedItem()).name);
+
             } else if (source == save) {
                 System.out.println("Saving...");
+                Save.save.saveSchedule();
             }
 
         }

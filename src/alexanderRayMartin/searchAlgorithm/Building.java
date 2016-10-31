@@ -3,10 +3,13 @@ package alexanderRayMartin.searchAlgorithm;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Building extends Node {
+public class Building extends Node implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     public String name;
     public String buildingNumber;
 

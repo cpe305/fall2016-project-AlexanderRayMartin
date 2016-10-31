@@ -11,7 +11,8 @@ public class Save {
 
     public static final String DIRECTORY = System.getProperty("user.home") + "/Documents/Poly Path/";
     public static final String SAVE_PATH = "save.data";
-    public Schedule schedule = new Schedule();
+    public static Save save = new Save();
+    public static Schedule schedule = new Schedule();
 
     /** Creates the save file and directory if it does not exist */
     public Save() {
@@ -38,14 +39,18 @@ public class Save {
         if (!file.exists())
             saveSchedule();
         try {
+
             FileInputStream fileInputStream = new FileInputStream(DIRECTORY + SAVE_PATH);
             ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
             schedule = (Schedule) inputStream.readObject();
             inputStream.close();
             fileInputStream.close();
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Corrupted Preferences File");
+            System.out.println("Corrupted save file");
+            schedule = new Schedule();
+            saveSchedule();
         }
     }
 

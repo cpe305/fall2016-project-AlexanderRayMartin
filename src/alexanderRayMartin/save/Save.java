@@ -11,13 +11,19 @@ public class Save {
 
     public static final String DIRECTORY = System.getProperty("user.home") + "/Documents/Poly Path/";
     public static final String SAVE_PATH = "save.data";
-    public static Save save = new Save();
-    public static Schedule schedule = new Schedule();
+    public static Save save;
 
     /** Creates the save file and directory if it does not exist */
-    public Save() {
+    private Save() {
         createDirectory();
         loadSchedule();
+    }
+
+    /** returns the instance of save */
+    public static Save getInstance() {
+        if (save == null)
+            save = new Save();
+        return save;
     }
 
     /** save the preferences */
@@ -25,7 +31,7 @@ public class Save {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(DIRECTORY + SAVE_PATH);
             ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(schedule);
+            outputStream.writeObject(Schedule.getInstance());
             outputStream.close();
             fileOutputStream.close();
         } catch (IOException e) {
@@ -34,7 +40,7 @@ public class Save {
     }
 
     /** load the preferences */
-    public void loadSchedule() {
+    private void loadSchedule() {
         File file = new File(DIRECTORY + SAVE_PATH);
         if (!file.exists())
             saveSchedule();
@@ -42,14 +48,13 @@ public class Save {
 
             FileInputStream fileInputStream = new FileInputStream(DIRECTORY + SAVE_PATH);
             ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
-            schedule = (Schedule) inputStream.readObject();
+            Schedule.getInstance().setSchedule((Schedule) inputStream.readObject());
             inputStream.close();
             fileInputStream.close();
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println("Corrupted save file");
-            schedule = new Schedule();
             saveSchedule();
         }
     }

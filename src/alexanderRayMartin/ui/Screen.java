@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import alexanderRayMartin.save.Save;
+import alexanderRayMartin.save.Schedule;
 import alexanderRayMartin.searchAlgorithm.Building;
 
 public class Screen extends JFrame {
@@ -102,13 +103,13 @@ public class Screen extends JFrame {
             Object source = event.getSource();
 
             if (source == addClass) {
-                Save.schedule.classes.add((Building) selectClass.getSelectedItem());
+                Schedule.getInstance().classes.add((Building) selectClass.getSelectedItem());
                 System.out.println("Adding class: " + ((Building) selectClass.getSelectedItem()).buildingNumber + " "
                         + ((Building) selectClass.getSelectedItem()).name);
 
             } else if (source == save) {
                 System.out.println("Saving...");
-                Save.save.saveSchedule();
+                Save.getInstance().saveSchedule();
             }
 
         }

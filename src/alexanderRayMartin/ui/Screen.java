@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -29,16 +30,21 @@ public class Screen extends JFrame {
 
     public Map map;
 
+    private JLabel scheduleLabel;
     private JPanel uiPanel;
     private JPanel schedulePanel;
-    private JPanel savePanel;
+
+    private JPanel classPanel;
+    private JPanel removeButtonPanel;
+    private JPanel classNamePanel;
 
     private JButton addClass;
     private JButton save;
 
     private JComboBox<Building> selectClass;
 
-    private JLabel scheduleLabel;
+    private ArrayList<JButton> removeClassButtons;
+    private ArrayList<JLabel> classLabels;
 
     private ButtonActionListener buttonListener;
     private MouseEventListener mouseListener;
@@ -68,10 +74,22 @@ public class Screen extends JFrame {
         Font buttonFont = new Font("Courier", Font.BOLD, 13);
         Dimension buttonSize = new Dimension(125, 40);
 
+        removeClassButtons = new ArrayList<JButton>();
+        classLabels = new ArrayList<JLabel>();
+
         schedulePanel = new JPanel();
-        savePanel = new JPanel();
+        classPanel = new JPanel();
+        classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.X_AXIS));
+        removeButtonPanel = new JPanel();
+        removeButtonPanel.setLayout(new BoxLayout(removeButtonPanel, BoxLayout.Y_AXIS));
+
+        classNamePanel = new JPanel();
+        classNamePanel.setLayout(new BoxLayout(classNamePanel, BoxLayout.Y_AXIS));
+
         uiPanel.add(schedulePanel);
-        uiPanel.add(savePanel);
+        uiPanel.add(classPanel);
+        classPanel.add(removeButtonPanel);
+        classPanel.add(classNamePanel);
 
         scheduleLabel = new JLabel("Schedule");
         scheduleLabel.setFont(new Font("Courier", Font.BOLD, 50));
@@ -93,8 +111,42 @@ public class Screen extends JFrame {
 
         schedulePanel.add(selectClass);
         schedulePanel.add(addClass);
+        schedulePanel.add(save);
 
-        savePanel.add(save);
+        for (int i = 0; i < Schedule.getInstance().classes.size(); i++) {
+            addClass(i);
+        }
+
+    }
+
+    private void addClass(int index) {
+        Font buttonFont = new Font("Courier", Font.PLAIN, 20);
+        Dimension buttonSize = new Dimension(125, 20);
+
+        removeClassButtons.add(new JButton("X"));
+        removeClassButtons.get(index).setFont(buttonFont);
+        removeClassButtons.get(index).setPreferredSize(buttonSize);
+        removeClassButtons.get(index).addActionListener(buttonListener);
+        removeButtonPanel.add(removeClassButtons.get(index));
+
+        classLabels.add(new JLabel(Schedule.getInstance().classes.get(index).abreviateString(25)));
+        classLabels.get(index).setFont(buttonFont);
+        classNamePanel.add(classLabels.get(index));
+
+        pack();
+    }
+
+    private void removeClass(int index) {
+        Schedule.getInstance().classes.remove(index);
+
+        removeClassButtons.get(index).removeActionListener(buttonListener);
+        removeClassButtons.remove(index);
+        removeButtonPanel.remove(index);
+
+        classLabels.remove(index);
+        classNamePanel.remove(index);
+
+        pack();
     }
 
     private class ButtonActionListener implements ActionListener {
@@ -104,12 +156,15 @@ public class Screen extends JFrame {
 
             if (source == addClass) {
                 Schedule.getInstance().classes.add((Building) selectClass.getSelectedItem());
+                addClass(Schedule.getInstance().classes.size() - 1);
                 System.out.println("Adding class: " + ((Building) selectClass.getSelectedItem()).buildingNumber + " "
                         + ((Building) selectClass.getSelectedItem()).name);
 
             } else if (source == save) {
                 System.out.println("Saving...");
                 Save.getInstance().saveSchedule();
+            } else if (removeClassButtons.contains(source)) {
+                removeClass(removeClassButtons.indexOf(source));
             }
 
         }

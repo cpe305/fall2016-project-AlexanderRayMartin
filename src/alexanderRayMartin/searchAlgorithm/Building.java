@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Building extends Node implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     public String name;
     public String buildingNumber;
 
@@ -20,6 +20,7 @@ public class Building extends Node implements Serializable {
         this.name = name;
     }
 
+    /** creates a new list if buildings is null */
     public static ArrayList<Building> getBuildings() {
         if (buildings == null) {
             buildings = new ArrayList<Building>();
@@ -58,6 +59,15 @@ public class Building extends Node implements Serializable {
 
     public String toString() {
         return buildingNumber + " " + name;
+    }
+
+    public String abreviateString(int length) {
+        String temp = name;
+        if (name.length() > length) {
+            temp = name.substring(0, length - buildingNumber.length());
+            temp = temp + "...";
+        }
+        return buildingNumber + " " + temp;
     }
 
 }

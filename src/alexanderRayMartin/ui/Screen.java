@@ -71,7 +71,7 @@ public class Screen extends JFrame {
     }
 
     public void createInterface() {
-        Font buttonFont = new Font("Courier", Font.BOLD, 13);
+        Font buttonFont = new Font("Courier", Font.PLAIN, 20);
         Dimension buttonSize = new Dimension(125, 40);
 
         removeClassButtons = new ArrayList<JButton>();
@@ -129,7 +129,7 @@ public class Screen extends JFrame {
         removeClassButtons.get(index).addActionListener(buttonListener);
         removeButtonPanel.add(removeClassButtons.get(index));
 
-        classLabels.add(new JLabel(Schedule.getInstance().classes.get(index).abreviateString(25)));
+        classLabels.add(new JLabel(Schedule.getInstance().classes.get(index).toString()));
         classLabels.get(index).setFont(buttonFont);
         classNamePanel.add(classLabels.get(index));
 

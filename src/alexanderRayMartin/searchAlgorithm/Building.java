@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Building extends Node implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final int ABREVIATE_LENGTH = 25;
 
     public String name;
     public String buildingNumber;
@@ -58,7 +59,7 @@ public class Building extends Node implements Serializable {
     }
 
     public String toString() {
-        return buildingNumber + " " + name;
+        return abreviateString(ABREVIATE_LENGTH);
     }
 
     public String abreviateString(int length) {

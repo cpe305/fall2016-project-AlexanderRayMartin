@@ -20,3 +20,125 @@
 19, Dining Complex
 19A, Sandwich Factory
 20, Engineering East
+20A, Bert and Candace Forbes Ctr. for Eng. Excellence
+21, Engineering West
+22, English
+24, Food Processing
+25, Faculty Offices East
+26, Graphic Arts
+26A, Printing Press
+26M, Graphic Arts Modular Offices
+27, Health Center
+28, Albert B. Smith Alumni and Conference Center
+31, University Housing
+32, Cal Poly Equine Center
+33, Clyde P. Fisher Science Hall
+34, Walter F. Dexter Building
+35, Robert E. Kennedy Library
+36, University Police
+38, Mathematics and Science
+40, Engineering South
+41, Engineering III
+41A, Grant M. Brown Engineering Building
+41B, Baldwin and Mary Reinhold Aerospace Eng. Lab
+42, Robert A. Matt Physical Education
+42A, Anderson Aquatic Center
+43, Recreation Center
+43A, Kinesiology
+44, Alex and Fay Spanos Theatre
+45, H.P. Davidson Music Center
+46, Old Natatorium
+47, Faculty Offices North
+48, Environmental Horticultural Science
+48X, Leaning Pine Arboretum
+50J, E-Surplus
+50L, Rose Float Lab
+51, University House
+52, Science
+52B, Science Observatory
+53, Science North
+55, Beef Cattle Evaluation Center
+56, Swine Unit
+57, Veterinary Hospital
+58, Welding
+60, Crandall Gymnasium
+61, Alex G. Spanos Stadium
+65, Julian A. McPhee University Union
+70, Facilities
+71, Transportation Services
+74, Building 74
+74M, Building 74 Modular Offices
+76, Old Power House
+77, Rodeo Arena
+80, Housing Warehouse / Risk Management
+81, Hillcrest
+82, Corporation Warehouse
+83, Technology Park
+92M, Poly Grave Trailer Park
+95, Architectural Canyon
+100, Shasta Hall
+101, Diablo Hall
+102, Palomar Hall
+103, Whitney Hall
+104, Lassen Hall
+105, Trinity Hall
+106, Santa Lucia Hall
+107, Muir Hall
+108, Sequoia Hall
+109, Fremont Hall
+110, Tenaya Hall
+112, Vista Grande
+113, Sierra Madre Hall
+114, Yosemite Hall
+115, Chase Hall
+116, Jespersen Hall
+117, Heron Hall
+117T, CAD Research Center
+121, Cheda Ranch
+121W, Trestle Vineyard
+122, Parker Ranch
+123, Peterson Ranch
+124, Student Services
+125, Serrano Ranch
+126, Chorro Creek Ranch
+127, Escuela Ranch
+127D, Escuela Beef Center
+130, Grand Avenue Parking Structure
+133, Orfalea Family and ASI Children's Center
+134, Visitor Information
+136, ITRC
+137, Student Experimental Farm
+139, Walter's Ranch
+150, Poultry Science Instructional Center
+153, Bella Montana
+154, Animal Nutrition Center
+155, J & G Lau Family Meat Processing Center
+160, Baggett Stadium
+161, Bob Janssen Field
+170, Cerro Vista Apartments
+170A, Cerro Morro
+170B, Cerro Cabrillo
+170C, Cerro Hollister
+170D, Cerro Romauldo
+170E, Cerro Bishop
+170F, Cerro Islay
+170G, Cerro San Luis
+171, Poly Canyon Village
+171A, Aliso
+171B, Buena Vista
+171C, Corralistos
+171D, Dover
+171E, Estrella
+171F, Foxen
+171G, Gypsum
+171H, Huasna
+171I, Inyo
+180, Warren J. Baker Center for Science and Mathematics
+186, Construction Innovations Center
+186C, Harriet amd Charles Luckman Hall
+187, Simpson Strong-Tie Lab
+192, Engineering IV
+197, Bonderson Engineering Project Center
+271, Village Drive Parking Structure
+371, Canyon Circle Parking Structure
+371B, University Housing Depot

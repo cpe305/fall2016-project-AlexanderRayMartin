@@ -1,4 +1,4 @@
-package alexanderRayMartin.ui;
+package alexanderraymartin.ui;
 
 public class UserInterface {
 

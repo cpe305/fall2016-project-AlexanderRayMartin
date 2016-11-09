@@ -2,3 +2,7 @@ language: java
 
 jdk:
   - oraclejdk8
+  
+script:
+# the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar

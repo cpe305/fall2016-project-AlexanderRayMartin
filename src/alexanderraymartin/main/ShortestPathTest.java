@@ -254,7 +254,6 @@ public class ShortestPathTest extends Applet {
   }
 
   private void testMode(int ycoord, int xcoord, MouseEvent event) {
-    // I left this mode in the final product because it's fun to use!
     if (!needMaze && inBoundary(ycoord, xcoord)) {
       if (maze[ycoord][xcoord] == white || maze[ycoord][xcoord] == yellow) {
         pathState = State.ADVANCE;

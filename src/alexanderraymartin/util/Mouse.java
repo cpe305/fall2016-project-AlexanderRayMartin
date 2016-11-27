@@ -11,17 +11,23 @@ public class Mouse implements MouseListener, MouseMotionListener {
   private static boolean mouseClicked = false;
   private static boolean mouseReleased = false;
 
+  /**
+   * @return The x coordinate of the mouse.
+   */
   public static int getX() {
     return mouseX;
   }
 
+  /**
+   * @return The y coordinate of the mouse.
+   */
   public static int getY() {
     return mouseY;
   }
 
 
   /**
-   * @return State of mouseB.
+   * @return The state of mouseB.
    */
   public static int getButton() {
     if (mouseB != -1) {

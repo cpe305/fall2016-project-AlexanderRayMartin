@@ -1,5 +1,6 @@
 package alexanderraymartin.util;
 
+
 public class Vector2i {
 
   private int xcoord;
@@ -42,19 +43,35 @@ public class Vector2i {
     return this;
   }
 
+
+  /**
+   * @return The x coordinate.
+   */
   public int getX() {
     return xcoord;
   }
 
+
+  /**
+   * @return The y coordinate.
+   */
   public int getY() {
     return ycoord;
   }
 
+  /**
+   * @param xcoord The x coordinate.
+   * @return The current instance of Vector2i.
+   */
   public Vector2i setX(int xcoord) {
     this.xcoord = xcoord;
     return this;
   }
 
+  /**
+   * @param ycoord The y coordinate.
+   * @return The current instance of Vector2i.
+   */
   public Vector2i setY(int ycoord) {
     this.ycoord = ycoord;
     return this;

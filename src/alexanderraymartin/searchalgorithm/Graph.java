@@ -10,13 +10,28 @@ import java.util.Queue;
 
 public class Graph {
 
+
+  /**
+   * Path for the text file containing the map node information.
+   */
+  private final String mapNodeFile = "src/mapNode.txt";
+  /**
+   * Adjacency matrix.
+   */
   private int[][] adj;
+  /**
+   * 2-D array of integers representing the nodes.
+   */
+  private int[][] nodes;
+
   private boolean[] visited;
   private int numVertices;
   private int rows;
   private int cols;
 
   /**
+   * Graph constructor for ShortestPathTest.
+   * 
    * @param rows The number of rows.
    * @param cols The number of columns.
    */
@@ -24,6 +39,29 @@ public class Graph {
     this.rows = rows;
     this.cols = cols;
     createAdj();
+  }
+
+  /**
+   * Graph constructor.
+   */
+  public Graph() {
+    createAdj();
+    createNodes();
+  }
+
+  private int[][] createNodes() {
+    int[] array = getArray(openFile(mapNodeFile));
+    int index = 2;
+    this.rows = array[0];
+    this.cols = array[1];
+    nodes = new int[rows][cols];
+
+    for (int y = 0; y < rows; y++) {
+      for (int x = 0; x < cols; x++) {
+        nodes[y][x] = array[index++];
+      }
+    }
+    return nodes;
   }
 
   /**
@@ -53,7 +91,7 @@ public class Graph {
     try {
       bufferedReader = new BufferedReader(fileReader);
       while ((line = bufferedReader.readLine()) != null) {
-        items = line.split(" ");
+        items = line.split("\\s+");
         for (int i = 0; i < items.length; i++) {
           arrayList.add(Integer.parseInt(items[i].trim()));
         }
@@ -80,7 +118,10 @@ public class Graph {
     }
   }
 
-  public int vertices() {
+  /**
+   * @return The number of vertices.
+   */
+  public int getNumVertices() {
     return numVertices;
   }
 
@@ -173,7 +214,7 @@ public class Graph {
 
   private void visit(int start) { // visits each element
     visited[start] = true;
-    for (int i = 0; i < vertices(); i++) {
+    for (int i = 0; i < getNumVertices(); i++) {
       if (adj[start][i] == 1 && visited[i] == false) {
         visit(i);
       }
@@ -206,7 +247,7 @@ public class Graph {
     while (true) {
       while (!queue.isEmpty()) {
         current = queue.remove();
-        for (int i = 0; i < vertices(); i++) {
+        for (int i = 0; i < getNumVertices(); i++) {
           if (adj[current][i] == 1) {
             if (i == stop) {
               return count;
@@ -221,7 +262,7 @@ public class Graph {
       count++;
       while (!tempQueue.isEmpty()) {
         current = tempQueue.remove();
-        for (int i = 0; i < vertices(); i++) {
+        for (int i = 0; i < getNumVertices(); i++) {
           if (adj[current][i] == 1) {
             if (i == stop) {
               return count;

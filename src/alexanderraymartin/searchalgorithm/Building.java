@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Building extends Node implements Serializable {
+public class Building implements Serializable {
 
   private static final long serialVersionUID = 1L;
   private static final int ABREVIATE_LENGTH = 25;

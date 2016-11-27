@@ -1,47 +1,33 @@
 package alexanderraymartin.main;
 
+import alexanderraymartin.save.Save;
+import alexanderraymartin.searchalgorithm.Building;
+import alexanderraymartin.searchalgorithm.Graph;
 import alexanderraymartin.ui.Map;
 import alexanderraymartin.ui.Screen;
 import alexanderraymartin.util.Mouse;
 
-import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
-public class MapEditor extends JFrame {
-
-  private static final long serialVersionUID = 1L;
-
-  public static final int WIDTH = Screen.WIDTH;
-  public static final int HEIGHT = Screen.HEIGHT;
+public class MapEditor {
 
   public Map map;
   public Mouse mouse;
-
-  // TODO Create Map Editor
-  // currently doesn't do anything
+  public Graph graph;
 
   /**
    * Creates the window.
    */
   public MapEditor() {
-    super("Map Editor");
-    map = new Map("src/map.png", 1, 0, 0);
-    mouse = new Mouse();
-    addMouseListener(mouse);
-    addMouseMotionListener(mouse);
-    add(map);
-    setVisible(true);
-    setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    pack();
-    setLocationRelativeTo(null);
+    Building.getBuildings();
+    Save.getInstance();
+    new Screen();
+    graph = new Graph();
+
   }
 
   /**

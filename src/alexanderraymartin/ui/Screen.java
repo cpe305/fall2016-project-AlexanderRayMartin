@@ -7,6 +7,7 @@ import alexanderraymartin.searchalgorithm.Building;
 import alexanderraymartin.searchalgorithm.Graph;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -190,6 +191,7 @@ public class Screen extends JFrame {
 
     classLabels.add(new JLabel(Schedule.getInstance().getClasses().get(index).toString()));
     classLabels.get(index).setFont(buttonFont);
+    classLabels.get(index).setForeground(new Color(0x0000ff << (index * 5)));
     classNamePanel.add(classLabels.get(index));
 
     pack();
@@ -292,8 +294,12 @@ public class Screen extends JFrame {
         for (int i = 0; i < Schedule.getInstance().getClasses().size() - 1; i++) {
           int classOne = Schedule.getInstance().getClasses().get(i).getNodeNumber();
           int classTwo = Schedule.getInstance().getClasses().get(i + 1).getNodeNumber();
-          Graph.getBuildingNodes().add(classOne);
-          Graph.getBuildingNodes().add(classTwo);
+          if (!Graph.getBuildingNodes().contains(classOne)) {
+            Graph.getBuildingNodes().add(classOne);
+          }
+          if (!Graph.getBuildingNodes().contains(classTwo)) {
+            Graph.getBuildingNodes().add(classTwo);
+          }
           findPath(classOne, classTwo);
         }
       }

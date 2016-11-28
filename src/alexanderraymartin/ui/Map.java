@@ -94,7 +94,8 @@ public class Map extends JPanel {
         if (Graph.getSchedulePaths().get(i)[j] != 0) {
           int xcoord = Graph.getSchedulePaths().get(i)[j] % graph.getCols();
           int ycoord = Graph.getSchedulePaths().get(i)[j] / graph.getCols();
-          drawSquare(graphics, new Color(0xC93C3C), xcoord, ycoord);
+          Color color = new Color(0xc65555);
+          drawSquare(graphics, color, xcoord, ycoord);
         }
       }
     }
@@ -103,7 +104,7 @@ public class Map extends JPanel {
     for (int i = 0; i < Graph.getBuildingNodes().size(); i++) {
       int xcoord = Graph.getBuildingNodes().get(i) % graph.getCols();
       int ycoord = Graph.getBuildingNodes().get(i) / graph.getCols();
-      drawSquare(graphics, new Color(0x155b84), xcoord, ycoord);
+      drawSquare(graphics, new Color(0x0000ff << (i * 5)), xcoord, ycoord);
     }
   }
 
@@ -122,7 +123,6 @@ public class Map extends JPanel {
 
   private BufferedImage loadImage(String fileName) {
     BufferedImage image = null;
-
     try {
       image = ImageIO.read(new File(fileName));
     } catch (IOException exception) {

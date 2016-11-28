@@ -20,7 +20,8 @@ public class Main {
     // test loading buildings
     for (int i = 0; i < Building.buildings.size(); i++) {
       System.out.println("Name: " + Building.buildings.get(i).name + " | Building Number: "
-          + Building.buildings.get(i).buildingNumber);
+          + Building.buildings.get(i).buildingNumber + " | Node Number: "
+          + Building.buildings.get(i).nodeNumber);
     }
 
     // test adding classes to schedule

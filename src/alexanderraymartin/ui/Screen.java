@@ -1,5 +1,6 @@
 package alexanderraymartin.ui;
 
+import alexanderraymartin.main.MapEditor;
 import alexanderraymartin.save.Save;
 import alexanderraymartin.save.Schedule;
 import alexanderraymartin.searchalgorithm.Building;
@@ -70,7 +71,6 @@ public class Screen extends JFrame {
     uiPanel = new JPanel();
     uiPanel.setPreferredSize(new Dimension(UI_WIDTH, HEIGHT));
     uiPanel.setLayout(new BoxLayout(uiPanel, BoxLayout.Y_AXIS));
-    map.addMouseListener(mouseListener);
     add(uiPanel, BorderLayout.WEST);
     add(map);
     createInterface();
@@ -133,7 +133,9 @@ public class Screen extends JFrame {
     schedulePanel.add(selectClass);
     schedulePanel.add(addClass);
     schedulePanel.add(save);
-    schedulePanel.add(findPath);
+    if (!MapEditor.editMode) {
+      schedulePanel.add(findPath);
+    }
 
     for (int i = 0; i < Schedule.getInstance().classes.size(); i++) {
       addClass(i);
@@ -152,6 +154,8 @@ public class Screen extends JFrame {
     editorSave.setPreferredSize(buttonSize);
     editorSave.addActionListener(buttonListener);
     schedulePanel.add(editorSave);
+    map.addMouseListener(mouseListener);
+    drawBuildings();
     pack();
   }
 
@@ -207,10 +211,10 @@ public class Screen extends JFrame {
    */
   private void placeLocations(int ycoord, int xcoord) {
     if (inBoundary(ycoord, xcoord)) {
-      if (graph.nodes[ycoord][xcoord] == -1) {
-        graph.nodes[ycoord][xcoord] = 0;
-      } else if (graph.nodes[ycoord][xcoord] == 0) {
-        graph.nodes[ycoord][xcoord] = -1;
+      if (graph.nodes[ycoord][xcoord] == Map.BLOCKED) {
+        graph.nodes[ycoord][xcoord] = Map.AVAILABLE_PATH;
+      } else if (graph.nodes[ycoord][xcoord] == Map.AVAILABLE_PATH) {
+        graph.nodes[ycoord][xcoord] = Map.BLOCKED;
       }
     }
   }
@@ -218,12 +222,22 @@ public class Screen extends JFrame {
   /**
    * Find the path.
    */
-  private void findPath() {
-    int[] path = graph.getPath(0, 517);
+  private void findPath(int start, int end) {
+    int[] path = graph.getPath(start, end);
+    Graph.getSchedulePaths().add(path);
     for (int i = 0; i < path.length; i++) {
       System.out.println(path[i]);
     }
+    repaint();
     System.out.println("Done!");
+  }
+
+  private void drawBuildings() {
+    for (int i = 0; i < Building.getBuildings().size(); i++) {
+      int xcoord = Building.getBuildings().get(i).nodeNumber % graph.cols;
+      int ycoord = Building.getBuildings().get(i).nodeNumber / graph.cols;
+      graph.nodes[ycoord][xcoord] = Map.BUILDING;
+    }
   }
 
   private class ButtonActionListener implements ActionListener {
@@ -246,7 +260,15 @@ public class Screen extends JFrame {
       } else if (source == editorSave) {
         graph.saveNodes();
       } else if (source == findPath) {
-        findPath();
+        // clear old paths
+        Graph.clearSchedulePaths();
+        for (int i = 0; i < Schedule.getInstance().classes.size() - 1; i++) {
+          int classOne = Schedule.getInstance().classes.get(i).nodeNumber;
+          int classTwo = Schedule.getInstance().classes.get(i + 1).nodeNumber;
+          Graph.getBuildingNodes().add(classOne);
+          Graph.getBuildingNodes().add(classTwo);
+          findPath(classOne, classTwo);
+        }
       }
 
     }

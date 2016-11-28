@@ -26,6 +26,14 @@ public class Graph {
    * 2-D array of integers representing the nodes.
    */
   public int[][] nodes;
+  /**
+   * ArrayList that contains each path for the entire schedule.
+   */
+  private static ArrayList<int[]> schedulePaths;
+  /**
+   * ArrayList that contains building nodes for the schedule.
+   */
+  private static ArrayList<Integer> buildingNodes;
 
   private boolean[] visited;
   private int numVertices;
@@ -51,6 +59,34 @@ public class Graph {
   public Graph() {
     createNodes();
     createAdj();
+  }
+
+  /**
+   * @return Creates an arrayList if schedulePaths is null, and returns it.
+   */
+  public static ArrayList<int[]> getSchedulePaths() {
+    if (schedulePaths == null) {
+      schedulePaths = new ArrayList<int[]>();
+    }
+    return schedulePaths;
+  }
+
+  /**
+   * @return Creates an arrayList if buildingNodes is null, and returns it.
+   */
+  public static ArrayList<Integer> getBuildingNodes() {
+    if (buildingNodes == null) {
+      buildingNodes = new ArrayList<Integer>();
+    }
+    return buildingNodes;
+  }
+
+  /**
+   * Creates a new arrayList for schedulePaths.
+   */
+  public static void clearSchedulePaths() {
+    schedulePaths = new ArrayList<int[]>();
+    buildingNodes = new ArrayList<Integer>();
   }
 
   private int[][] createNodes() {
@@ -179,6 +215,9 @@ public class Graph {
     if (shortestPath == -1) {
       return new int[0]; // return if no path
     }
+    if (start == stop) {
+      return new int[0];
+    }
     int[] path = new int[shortestPath];
     int index = 0;
     int distance = -1;
@@ -220,7 +259,7 @@ public class Graph {
     return true;
   }
 
-  
+
   /**
    * @param ycoord Y coordinate.
    * @param xcoord Y coordinate.

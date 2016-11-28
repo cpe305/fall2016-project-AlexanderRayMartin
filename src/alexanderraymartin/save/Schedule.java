@@ -10,7 +10,7 @@ public class Schedule implements Serializable {
   private static final long serialVersionUID = 1L;
 
   public ArrayList<Building> classes;
-  public static Schedule schedule;
+  private static Schedule schedule;
 
   private Schedule() {
     classes = new ArrayList<Building>();
@@ -26,6 +26,9 @@ public class Schedule implements Serializable {
     return schedule;
   }
 
+  /**
+   * @param schedule The instance of schedule.
+   */
   public void setSchedule(Schedule schedule) {
     Schedule.schedule = schedule;
   }
@@ -43,6 +46,9 @@ public class Schedule implements Serializable {
     return -1;
   }
 
+  /**
+   * @param building The building to remove.
+   */
   public void removeBuilding(Building building) {
     classes.remove(building);
   }

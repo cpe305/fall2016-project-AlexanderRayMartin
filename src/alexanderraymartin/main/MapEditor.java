@@ -3,9 +3,7 @@ package alexanderraymartin.main;
 import alexanderraymartin.save.Save;
 import alexanderraymartin.searchalgorithm.Building;
 import alexanderraymartin.searchalgorithm.Graph;
-import alexanderraymartin.ui.Map;
 import alexanderraymartin.ui.Screen;
-import alexanderraymartin.util.Mouse;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,14 +16,14 @@ import java.util.ArrayList;
 
 public class MapEditor {
 
-  public Map map;
-  public Mouse mouse;
   public Graph graph;
+  public static boolean editMode = false;
 
   /**
    * Creates the window.
    */
   public MapEditor() {
+    editMode = true;
     Building.getBuildings();
     Save.getInstance();
     graph = new Graph();

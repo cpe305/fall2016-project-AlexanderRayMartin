@@ -34,6 +34,5 @@ public class Main {
     for (int i = 0; i < Schedule.getInstance().getClasses().size(); i++) {
       System.out.println(Schedule.getInstance().getClasses().get(i));
     }
-
   }
 }

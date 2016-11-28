@@ -24,7 +24,7 @@ public class Save {
   /**
    * The static instance of Save.
    */
-  public static Save save;
+  private static Save save;
 
   /**
    * Creates the save file and directory if it does not exist.

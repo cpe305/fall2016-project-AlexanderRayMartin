@@ -29,7 +29,7 @@ public class Graph {
   /**
    * 2-D array of integers representing the nodes.
    */
-  public int[][] nodes;
+  private int[][] nodes;
   /**
    * ArrayList that contains each path for the entire schedule.
    */
@@ -45,11 +45,11 @@ public class Graph {
   /**
    * The number of rows.
    */
-  public int rows;
+  private int rows;
   /**
    * The number of columns.
    */
-  public int cols;
+  private int cols;
 
   /**
    * Graph constructor for ShortestPathTest.
@@ -69,6 +69,36 @@ public class Graph {
   public Graph() {
     createNodes();
     createAdj();
+  }
+
+  /**
+   * @return Nodes array.
+   */
+  public int getNodes(int xcoord, int ycoord) {
+    return nodes[ycoord][xcoord];
+  }
+
+  /**
+   * @param xcoord The x index.
+   * @param ycoord The y index.
+   * @param data The data to set.
+   */
+  public void setNode(int xcoord, int ycoord, int data) {
+    nodes[ycoord][xcoord] = data;
+  }
+
+  /**
+   * @return The number of rows.
+   */
+  public int getRows() {
+    return rows;
+  }
+
+  /**
+   * @return The number of columns.
+   */
+  public int getCols() {
+    return cols;
   }
 
   /**

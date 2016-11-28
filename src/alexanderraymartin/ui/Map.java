@@ -64,24 +64,24 @@ public class Map extends JPanel {
     BufferedImage image = loadImage(fileName);
     at.scale(scale, scale);
     Graphics2D g2 = (Graphics2D) graphics;
-    int size = Screen.HEIGHT / graph.rows;
+    int size = Screen.HEIGHT / graph.getRows();
 
     // draw image
     g2.drawImage(image, at, null);
 
     // draw path
-    if (MapEditor.editMode) {
-      for (int y = 0; y < graph.rows; y++) {
-        for (int x = 0; x < graph.cols; x++) {
+    if (MapEditor.inEditMode()) {
+      for (int y = 0; y < graph.getRows(); y++) {
+        for (int x = 0; x < graph.getCols(); x++) {
           // grid
           g2.setColor(Color.LIGHT_GRAY);
           g2.drawRect(x * size, y * size, size, size);
 
-          if (graph.nodes[y][x] == AVAILABLE_PATH) {
+          if (graph.getNodes(x, y) == AVAILABLE_PATH) {
             drawSquare(graphics, new Color(0xC93C3C), x, y);
           }
 
-          if (graph.nodes[y][x] == BUILDING) {
+          if (graph.getNodes(x, y) == BUILDING) {
             drawSquare(graphics, new Color(0x155b84), x, y);
           }
         }
@@ -92,8 +92,8 @@ public class Map extends JPanel {
     for (int i = 0; i < Graph.getSchedulePaths().size(); i++) {
       for (int j = 0; j < Graph.getSchedulePaths().get(i).length; j++) {
         if (Graph.getSchedulePaths().get(i)[j] != 0) {
-          int xcoord = Graph.getSchedulePaths().get(i)[j] % graph.cols;
-          int ycoord = Graph.getSchedulePaths().get(i)[j] / graph.cols;
+          int xcoord = Graph.getSchedulePaths().get(i)[j] % graph.getCols();
+          int ycoord = Graph.getSchedulePaths().get(i)[j] / graph.getCols();
           drawSquare(graphics, new Color(0xC93C3C), xcoord, ycoord);
         }
       }
@@ -101,8 +101,8 @@ public class Map extends JPanel {
 
     // draw buildings
     for (int i = 0; i < Graph.getBuildingNodes().size(); i++) {
-      int xcoord = Graph.getBuildingNodes().get(i) % graph.cols;
-      int ycoord = Graph.getBuildingNodes().get(i) / graph.cols;
+      int xcoord = Graph.getBuildingNodes().get(i) % graph.getCols();
+      int ycoord = Graph.getBuildingNodes().get(i) / graph.getCols();
       drawSquare(graphics, new Color(0x155b84), xcoord, ycoord);
     }
   }
@@ -115,7 +115,7 @@ public class Map extends JPanel {
    */
   public void drawSquare(Graphics graphics, Color color, int xcoord, int ycoord) {
     Graphics2D g2 = (Graphics2D) graphics;
-    int size = Screen.HEIGHT / graph.rows;
+    int size = Screen.HEIGHT / graph.getRows();
     g2.setColor(color);
     g2.fillRect((int) ((xcoord + 0.25) * size), (int) ((ycoord + 0.25) * size), size / 2, size / 2);
   }

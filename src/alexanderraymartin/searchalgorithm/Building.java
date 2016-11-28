@@ -16,27 +16,49 @@ public class Building implements Serializable {
   private static final int ABREVIATE_LENGTH = 25;
 
   /**
-   * Name of the building.
+   * The building name.
    */
-  public String name;
+  private String name;
   /**
    * The building number.
    */
-  public String buildingNumber;
+  private String buildingNumber;
   /**
    * The node number.
    */
-  public int nodeNumber;
+  private int nodeNumber;
 
   /**
    * List of buildings in a user's schedule.
    */
-  public static ArrayList<Building> buildings;
+  private static ArrayList<Building> buildings;
 
   private Building(String buildingNumber, String name, int nodeNumber) {
     this.buildingNumber = buildingNumber;
     this.name = name;
     this.nodeNumber = nodeNumber;
+  }
+
+
+  /**
+   * @return The building name.
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * @return The building number.
+   */
+  public String getBuildingNumber() {
+    return buildingNumber;
+  }
+
+  /**
+   * @return The node number.
+   */
+  public int getNodeNumber() {
+    return nodeNumber;
   }
 
   /**

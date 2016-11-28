@@ -23,23 +23,38 @@ public class MapEditor {
   /**
    * The graph for the map editor.
    */
-  public Graph graph;
+  private Graph graph;
   /**
    * True if the program running is in edit mode.
    */
-  public static boolean editMode = false;
+  private static boolean editMode;
 
   /**
    * Creates the window.
    */
   public MapEditor() {
-    editMode = true;
+    setEditMode(true);
     Building.getBuildings();
     Save.getInstance();
     graph = new Graph();
     Screen screen = new Screen(graph);
     screen.createEditorInterface();
     // createBlankNodeMap(50, 50);
+  }
+
+
+  /**
+   * @return True if the program is in edit mode.
+   */
+  public static boolean inEditMode() {
+    return editMode;
+  }
+
+  /**
+   * Set edit mode.
+   */
+  public static void setEditMode(boolean value) {
+    editMode = value;
   }
 
   /**

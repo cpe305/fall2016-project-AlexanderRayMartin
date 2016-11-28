@@ -51,7 +51,7 @@ public class Screen extends JFrame {
   /**
    * The map for the screen.
    */
-  public Map map;
+  private Map map;
   private Graph graph;
 
   private JLabel scheduleLabel;
@@ -145,14 +145,14 @@ public class Screen extends JFrame {
     findPath.addActionListener(buttonListener);
 
     selectClass = new JComboBox<Building>(
-        Building.buildings.toArray(new Building[Building.buildings.size()]));
+        Building.getBuildings().toArray(new Building[Building.getBuildings().size()]));
     selectClass.setFont(buttonFont);
     selectClass.setMaximumRowCount(10);
 
     schedulePanel.add(selectClass);
     schedulePanel.add(addClass);
     schedulePanel.add(save);
-    if (!MapEditor.editMode) {
+    if (!MapEditor.inEditMode()) {
       schedulePanel.add(findPath);
     }
 
@@ -216,7 +216,7 @@ public class Screen extends JFrame {
    * @return True if in bounds, else false.
    */
   private boolean inBoundary(int ycoord, int xcoord) {
-    if (ycoord < 0 || ycoord >= graph.rows || xcoord < 0 || xcoord >= graph.cols) {
+    if (ycoord < 0 || ycoord >= graph.getRows() || xcoord < 0 || xcoord >= graph.getCols()) {
       return false;
     }
     return true;
@@ -230,10 +230,10 @@ public class Screen extends JFrame {
    */
   private void placeLocations(int ycoord, int xcoord) {
     if (inBoundary(ycoord, xcoord)) {
-      if (graph.nodes[ycoord][xcoord] == Map.BLOCKED) {
-        graph.nodes[ycoord][xcoord] = Map.AVAILABLE_PATH;
-      } else if (graph.nodes[ycoord][xcoord] == Map.AVAILABLE_PATH) {
-        graph.nodes[ycoord][xcoord] = Map.BLOCKED;
+      if (graph.getNodes(xcoord, ycoord) == Map.BLOCKED) {
+        graph.setNode(xcoord, ycoord, Map.AVAILABLE_PATH);
+      } else if (graph.getNodes(xcoord, ycoord) == Map.AVAILABLE_PATH) {
+        graph.setNode(xcoord, ycoord, Map.BLOCKED);
       }
     }
   }
@@ -256,9 +256,9 @@ public class Screen extends JFrame {
    */
   private void drawBuildings() {
     for (int i = 0; i < Building.getBuildings().size(); i++) {
-      int xcoord = Building.getBuildings().get(i).nodeNumber % graph.cols;
-      int ycoord = Building.getBuildings().get(i).nodeNumber / graph.cols;
-      graph.nodes[ycoord][xcoord] = Map.BUILDING;
+      int xcoord = Building.getBuildings().get(i).getNodeNumber() % graph.getCols();
+      int ycoord = Building.getBuildings().get(i).getNodeNumber() / graph.getCols();
+      graph.setNode(xcoord, ycoord, Map.BUILDING);
     }
   }
 
@@ -275,9 +275,9 @@ public class Screen extends JFrame {
       if (source == addClass) {
         Schedule.getInstance().classes.add((Building) selectClass.getSelectedItem());
         addClass(Schedule.getInstance().classes.size() - 1);
-        System.out
-            .println("Adding class: " + ((Building) selectClass.getSelectedItem()).buildingNumber
-                + " " + ((Building) selectClass.getSelectedItem()).name);
+        System.out.println(
+            "Adding class: " + ((Building) selectClass.getSelectedItem()).getBuildingNumber() + " "
+                + ((Building) selectClass.getSelectedItem()).getName());
 
       } else if (source == save) {
         System.out.println("Saving...");
@@ -290,8 +290,8 @@ public class Screen extends JFrame {
         // clear old paths
         Graph.clearSchedulePaths();
         for (int i = 0; i < Schedule.getInstance().classes.size() - 1; i++) {
-          int classOne = Schedule.getInstance().classes.get(i).nodeNumber;
-          int classTwo = Schedule.getInstance().classes.get(i + 1).nodeNumber;
+          int classOne = Schedule.getInstance().classes.get(i).getNodeNumber();
+          int classTwo = Schedule.getInstance().classes.get(i + 1).getNodeNumber();
           Graph.getBuildingNodes().add(classOne);
           Graph.getBuildingNodes().add(classTwo);
           findPath(classOne, classTwo);
@@ -319,7 +319,7 @@ public class Screen extends JFrame {
       int startY = event.getY();
       int xcoord = startX / NODE_SIZE;
       int ycoord = startY / NODE_SIZE;
-      System.out.println(ycoord * graph.cols + xcoord);
+      System.out.println(ycoord * graph.getCols() + xcoord);
       placeLocations(ycoord, xcoord);
       repaint();
     }

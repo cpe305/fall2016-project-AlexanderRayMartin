@@ -16,7 +16,7 @@ public class Schedule implements Serializable {
   /**
    * ArrayList of all of the possible classes.
    */
-  public ArrayList<Building> classes;
+  private ArrayList<Building> classes;
 
   private static Schedule schedule;
 
@@ -32,6 +32,13 @@ public class Schedule implements Serializable {
       schedule = new Schedule();
     }
     return schedule;
+  }
+
+  /**
+   * @return ArrayList of all of the possible classes.
+   */
+  public ArrayList<Building> getClasses() {
+    return classes;
   }
 
   /**

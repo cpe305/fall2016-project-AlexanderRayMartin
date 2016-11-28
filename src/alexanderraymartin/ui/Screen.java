@@ -156,7 +156,7 @@ public class Screen extends JFrame {
       schedulePanel.add(findPath);
     }
 
-    for (int i = 0; i < Schedule.getInstance().classes.size(); i++) {
+    for (int i = 0; i < Schedule.getInstance().getClasses().size(); i++) {
       addClass(i);
     }
 
@@ -188,7 +188,7 @@ public class Screen extends JFrame {
     removeClassButtons.get(index).addActionListener(buttonListener);
     removeButtonPanel.add(removeClassButtons.get(index));
 
-    classLabels.add(new JLabel(Schedule.getInstance().classes.get(index).toString()));
+    classLabels.add(new JLabel(Schedule.getInstance().getClasses().get(index).toString()));
     classLabels.get(index).setFont(buttonFont);
     classNamePanel.add(classLabels.get(index));
 
@@ -196,7 +196,7 @@ public class Screen extends JFrame {
   }
 
   private void removeClass(int index) {
-    Schedule.getInstance().classes.remove(index);
+    Schedule.getInstance().getClasses().remove(index);
 
     removeClassButtons.get(index).removeActionListener(buttonListener);
     removeClassButtons.remove(index);
@@ -273,8 +273,8 @@ public class Screen extends JFrame {
       Object source = event.getSource();
 
       if (source == addClass) {
-        Schedule.getInstance().classes.add((Building) selectClass.getSelectedItem());
-        addClass(Schedule.getInstance().classes.size() - 1);
+        Schedule.getInstance().getClasses().add((Building) selectClass.getSelectedItem());
+        addClass(Schedule.getInstance().getClasses().size() - 1);
         System.out.println(
             "Adding class: " + ((Building) selectClass.getSelectedItem()).getBuildingNumber() + " "
                 + ((Building) selectClass.getSelectedItem()).getName());
@@ -289,9 +289,9 @@ public class Screen extends JFrame {
       } else if (source == findPath) {
         // clear old paths
         Graph.clearSchedulePaths();
-        for (int i = 0; i < Schedule.getInstance().classes.size() - 1; i++) {
-          int classOne = Schedule.getInstance().classes.get(i).getNodeNumber();
-          int classTwo = Schedule.getInstance().classes.get(i + 1).getNodeNumber();
+        for (int i = 0; i < Schedule.getInstance().getClasses().size() - 1; i++) {
+          int classOne = Schedule.getInstance().getClasses().get(i).getNodeNumber();
+          int classTwo = Schedule.getInstance().getClasses().get(i + 1).getNodeNumber();
           Graph.getBuildingNodes().add(classOne);
           Graph.getBuildingNodes().add(classTwo);
           findPath(classOne, classTwo);

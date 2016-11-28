@@ -31,8 +31,8 @@ public class Main {
 
     // test adding classes to schedule
     System.out.println("\nSchedule: ");
-    for (int i = 0; i < Schedule.getInstance().classes.size(); i++) {
-      System.out.println(Schedule.getInstance().classes.get(i));
+    for (int i = 0; i < Schedule.getInstance().getClasses().size(); i++) {
+      System.out.println(Schedule.getInstance().getClasses().get(i));
     }
 
   }

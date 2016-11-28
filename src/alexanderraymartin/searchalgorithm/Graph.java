@@ -1,8 +1,11 @@
 package alexanderraymartin.searchalgorithm;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -22,12 +25,13 @@ public class Graph {
   /**
    * 2-D array of integers representing the nodes.
    */
-  private int[][] nodes;
+  public int[][] nodes;
 
   private boolean[] visited;
   private int numVertices;
-  private int rows;
-  private int cols;
+
+  public int rows;
+  public int cols;
 
   /**
    * Graph constructor for ShortestPathTest.
@@ -45,8 +49,8 @@ public class Graph {
    * Graph constructor.
    */
   public Graph() {
-    createAdj();
     createNodes();
+    createAdj();
   }
 
   private int[][] createNodes() {
@@ -62,6 +66,42 @@ public class Graph {
       }
     }
     return nodes;
+  }
+
+  /**
+   * Saves the node grid to the file.
+   */
+  public void saveNodes() {
+    File file = new File("src/mapNode.txt");
+    FileWriter fw;
+    System.out.println("Saving nodes");
+    try {
+      fw = new FileWriter(file);
+      BufferedWriter bw = new BufferedWriter(fw);
+
+      bw.write(String.valueOf(rows));
+      bw.write("  ");
+      bw.write(String.valueOf(cols));
+      bw.newLine();
+
+      for (int y = 0; y < rows; y++) {
+        for (int x = 0; x < cols; x++) {
+          bw.write(String.valueOf(nodes[y][x]));
+          if (nodes[y][x] == -1) {
+            bw.write(" ");
+          } else {
+            bw.write("  ");
+          }
+        }
+        if (y != rows - 1) {
+          bw.newLine();
+        }
+      }
+
+      bw.close();
+    } catch (IOException exception) {
+      exception.printStackTrace();
+    }
   }
 
   /**
@@ -164,6 +204,52 @@ public class Graph {
       }
     }
     return path;
+  }
+
+  /**
+   * Checks if the mouse click is in the boundary.
+   * 
+   * @param ycoord The y coordinate of the mouse.
+   * @param xcoord The x coordinate of the mouse.
+   * @return True if in bounds, else false.
+   */
+  private boolean inBoundary(int ycoord, int xcoord) {
+    if (ycoord < 0 || ycoord >= rows || xcoord < 0 || xcoord >= cols) {
+      return false;
+    }
+    return true;
+  }
+
+  
+  /**
+   * @param ycoord Y coordinate.
+   * @param xcoord Y coordinate.
+   * @param y0 Y initial.
+   * @param x0 X initial.
+   */
+  private void checkEdge(int ycoord, int xcoord, int y0, int x0) {
+    if (inBoundary(ycoord, xcoord)) { // check boundary
+      if (nodes[ycoord][xcoord] != -1) {
+        addEdge(y0 * cols + x0, ycoord * cols + xcoord);
+      }
+    }
+  }
+
+  /**
+   * Creates the graph's adjacency matrix.
+   */
+  public void makeGraph() {
+    for (int y = 0; y < rows; y++) {
+      for (int x = 0; x < cols; x++) {
+        if (nodes[y][x] != -1) {
+          checkEdge(y - 1, x, y, x); // above
+          checkEdge(y + 1, x, y, x); // below
+          checkEdge(y, x - 1, y, x); // left
+          checkEdge(y, x + 1, y, x); // right
+
+        }
+      }
+    }
   }
 
   /**

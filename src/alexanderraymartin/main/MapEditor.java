@@ -8,8 +8,11 @@ import alexanderraymartin.ui.Screen;
 import alexanderraymartin.util.Mouse;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,9 +28,10 @@ public class MapEditor {
   public MapEditor() {
     Building.getBuildings();
     Save.getInstance();
-    new Screen();
     graph = new Graph();
-
+    Screen screen = new Screen(graph);
+    screen.createEditorInterface();
+    // createBlankNodeMap(50, 50);
   }
 
   /**
@@ -70,14 +74,43 @@ public class MapEditor {
     return array;
   }
 
-  public void saveGrid() {
+  /**
+   * Creates and saves a blank node map to a file.
+   * 
+   * @param rows The number of rows.
+   * @param cols The number of columns.
+   */
+  public static void createBlankNodeMap(int rows, int cols) {
+    File file = new File("src/mapNode_temp.txt");
+    FileWriter fw;
+    System.out.println("Creating blank node map");
+    try {
+      fw = new FileWriter(file);
+      BufferedWriter bw = new BufferedWriter(fw);
 
+      bw.write(String.valueOf(rows));
+      bw.write("  ");
+      bw.write(String.valueOf(cols));
+      bw.newLine();
+
+      for (int y = 0; y < rows; y++) {
+        for (int x = 0; x < cols; x++) {
+          bw.write("-1 ");
+        }
+        if (y != rows - 1) {
+          bw.newLine();
+        }
+      }
+
+      bw.close();
+    } catch (IOException exception) {
+      exception.printStackTrace();
+    }
   }
 
-  public void loadGrid() {
-
-  }
-
+  /**
+   * @param args Command line arguments.
+   */
   public static void main(String[] args) {
     new MapEditor();
   }

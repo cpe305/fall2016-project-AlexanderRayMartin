@@ -55,13 +55,11 @@ public class Save {
       saveSchedule();
     }
     try {
-
       FileInputStream fileInputStream = new FileInputStream(DIRECTORY + SAVE_PATH);
       ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
       Schedule.getInstance().setSchedule((Schedule) inputStream.readObject());
       inputStream.close();
       fileInputStream.close();
-
     } catch (IOException | ClassNotFoundException exception) {
       exception.printStackTrace();
       System.out.println("Corrupted save file");

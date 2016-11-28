@@ -3,6 +3,7 @@ package alexanderraymartin.main;
 import alexanderraymartin.save.Save;
 import alexanderraymartin.save.Schedule;
 import alexanderraymartin.searchalgorithm.Building;
+import alexanderraymartin.searchalgorithm.Graph;
 import alexanderraymartin.ui.Screen;
 
 public class Main {
@@ -13,7 +14,8 @@ public class Main {
   public static void main(String[] args) {
     Building.getBuildings();
     Save.getInstance();
-    new Screen();
+    Graph graph = new Graph();
+    new Screen(graph);
 
     // test loading buildings
     for (int i = 0; i < Building.buildings.size(); i++) {

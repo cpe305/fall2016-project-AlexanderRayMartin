@@ -3,6 +3,7 @@ package alexanderraymartin.ui;
 import alexanderraymartin.save.Save;
 import alexanderraymartin.save.Schedule;
 import alexanderraymartin.searchalgorithm.Building;
+import alexanderraymartin.searchalgorithm.Graph;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -28,8 +29,10 @@ public class Screen extends JFrame {
   public static final int UI_WIDTH = 400;
   public static final int WIDTH = 1000 + UI_WIDTH;
   public static final int HEIGHT = 1000;
+  public static final int NODE_SIZE = 20;
 
   public Map map;
+  private Graph graph;
 
   private JLabel scheduleLabel;
   private JPanel uiPanel;
@@ -41,6 +44,9 @@ public class Screen extends JFrame {
 
   private JButton addClass;
   private JButton save;
+  private JButton findPath;
+
+  private JButton editorSave;
 
   private JComboBox<Building> selectClass;
 
@@ -53,16 +59,18 @@ public class Screen extends JFrame {
   /**
    * Creates the window.
    */
-  public Screen() {
+  public Screen(Graph graph) {
     super("Poly Path");
-    map = new Map("src/mapZoom.png", 1, 0, 0);
+    this.graph = graph;
+    graph.makeGraph();
+    map = new Map("src/mapZoom.png", 1, 0, 0, graph);
     mouseListener = new MouseEventListener();
     buttonListener = new ButtonActionListener();
     buttonListener = new ButtonActionListener();
     uiPanel = new JPanel();
     uiPanel.setPreferredSize(new Dimension(UI_WIDTH, HEIGHT));
     uiPanel.setLayout(new BoxLayout(uiPanel, BoxLayout.Y_AXIS));
-    addMouseListener(mouseListener);
+    map.addMouseListener(mouseListener);
     add(uiPanel, BorderLayout.WEST);
     add(map);
     createInterface();
@@ -79,7 +87,7 @@ public class Screen extends JFrame {
    */
   public void createInterface() {
     final Font buttonFont = new Font("Courier", Font.PLAIN, 20);
-    final Dimension buttonSize = new Dimension(125, 40);
+    final Dimension buttonSize = new Dimension(175, 50);
 
     removeClassButtons = new ArrayList<JButton>();
     classLabels = new ArrayList<JLabel>();
@@ -112,6 +120,11 @@ public class Screen extends JFrame {
     save.setPreferredSize(buttonSize);
     save.addActionListener(buttonListener);
 
+    findPath = new JButton("Find Path");
+    findPath.setFont(buttonFont);
+    findPath.setPreferredSize(buttonSize);
+    findPath.addActionListener(buttonListener);
+
     selectClass = new JComboBox<Building>(
         Building.buildings.toArray(new Building[Building.buildings.size()]));
     selectClass.setFont(buttonFont);
@@ -120,11 +133,26 @@ public class Screen extends JFrame {
     schedulePanel.add(selectClass);
     schedulePanel.add(addClass);
     schedulePanel.add(save);
+    schedulePanel.add(findPath);
 
     for (int i = 0; i < Schedule.getInstance().classes.size(); i++) {
       addClass(i);
     }
 
+  }
+
+  /**
+   * Creates the interface for editor mode.
+   */
+  public void createEditorInterface() {
+    final Font buttonFont = new Font("Courier", Font.PLAIN, 20);
+    final Dimension buttonSize = new Dimension(175, 50);
+    editorSave = new JButton("Export");
+    editorSave.setFont(buttonFont);
+    editorSave.setPreferredSize(buttonSize);
+    editorSave.addActionListener(buttonListener);
+    schedulePanel.add(editorSave);
+    pack();
   }
 
   private void addClass(int index) {
@@ -157,6 +185,47 @@ public class Screen extends JFrame {
     pack();
   }
 
+  /**
+   * Checks if the mouse click is in the boundary.
+   * 
+   * @param ycoord The y coordinate of the mouse.
+   * @param xcoord The x coordinate of the mouse.
+   * @return True if in bounds, else false.
+   */
+  private boolean inBoundary(int ycoord, int xcoord) {
+    if (ycoord < 0 || ycoord >= graph.rows || xcoord < 0 || xcoord >= graph.cols) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Place a node at the mouse click.
+   * 
+   * @param ycoord The y coordinate of the mouse.
+   * @param xcoord The x coordinate of the mouse.
+   */
+  private void placeLocations(int ycoord, int xcoord) {
+    if (inBoundary(ycoord, xcoord)) {
+      if (graph.nodes[ycoord][xcoord] == -1) {
+        graph.nodes[ycoord][xcoord] = 0;
+      } else if (graph.nodes[ycoord][xcoord] == 0) {
+        graph.nodes[ycoord][xcoord] = -1;
+      }
+    }
+  }
+
+  /**
+   * Find the path.
+   */
+  private void findPath() {
+    int[] path = graph.getPath(0, 517);
+    for (int i = 0; i < path.length; i++) {
+      System.out.println(path[i]);
+    }
+    System.out.println("Done!");
+  }
+
   private class ButtonActionListener implements ActionListener {
     public void actionPerformed(ActionEvent event) {
 
@@ -174,6 +243,10 @@ public class Screen extends JFrame {
         Save.getInstance().saveSchedule();
       } else if (removeClassButtons.contains(source)) {
         removeClass(removeClassButtons.indexOf(source));
+      } else if (source == editorSave) {
+        graph.saveNodes();
+      } else if (source == findPath) {
+        findPath();
       }
 
     }
@@ -183,7 +256,13 @@ public class Screen extends JFrame {
     public void mouseClicked(MouseEvent event) {}
 
     public void mousePressed(MouseEvent event) {
-
+      int startX = event.getX();
+      int startY = event.getY();
+      int xcoord = (int) (startX / NODE_SIZE);
+      int ycoord = (int) (startY / NODE_SIZE);
+      System.out.println(ycoord * graph.cols + xcoord);
+      placeLocations(ycoord, xcoord);
+      repaint();
     }
 
     public void mouseReleased(MouseEvent event) {}

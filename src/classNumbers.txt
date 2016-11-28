@@ -1,144 +1,144 @@
-1, Administration
-2, Cotchett Education
-3, Business
-4, Research Development Center
-5, Architecture & Environmental Design
-6, Christopher Cohan Performing Arts Center
-7, Advanced Technology Laboratories
-8, Bioresource & Agricultural Engineering
-8A, Bioresource & Agricultural Engineering Shop
-9, Farm Shop
-10, Alan A. Erhart Agriculture
-11, Agricultural Sciences
-13, Engineering
-14, Frank E. Pilling Computer Science
-15, Cal Poly Corporation Administration
-16, Beef Unit
-17, Crop Science
-18, Eugene & Rachel Boone Dairy Science Center
-18A, Dairy Products Technology Center
-19, Dining Complex
-19A, Sandwich Factory
-20, Engineering East
-20A, Bert and Candace Forbes Ctr. for Eng. Excellence
-21, Engineering West
-22, English
-24, Food Processing
-25, Faculty Offices East
-26, Graphic Arts
-26A, Printing Press
-26M, Graphic Arts Modular Offices
-27, Health Center
-28, Albert B. Smith Alumni and Conference Center
-31, University Housing
-32, Cal Poly Equine Center
-33, Clyde P. Fisher Science Hall
-34, Walter F. Dexter Building
-35, Robert E. Kennedy Library
-36, University Police
-38, Mathematics and Science
-40, Engineering South
-41, Engineering III
-41A, Grant M. Brown Engineering Building
-41B, Baldwin and Mary Reinhold Aerospace Eng. Lab
-42, Robert A. Matt Physical Education
-42A, Anderson Aquatic Center
-43, Recreation Center
-43A, Kinesiology
-44, Alex and Fay Spanos Theatre
-45, H.P. Davidson Music Center
-46, Old Natatorium
-47, Faculty Offices North
-48, Environmental Horticultural Science
-48X, Leaning Pine Arboretum
-50J, E-Surplus
-50L, Rose Float Lab
-51, University House
-52, Science
-52B, Science Observatory
-53, Science North
-55, Beef Cattle Evaluation Center
-56, Swine Unit
-57, Veterinary Hospital
-58, Welding
-60, Crandall Gymnasium
-61, Alex G. Spanos Stadium
-65, Julian A. McPhee University Union
-70, Facilities
-71, Transportation Services
-74, Building 74
-74M, Building 74 Modular Offices
-76, Old Power House
-77, Rodeo Arena
-80, Housing Warehouse / Risk Management
-81, Hillcrest
-82, Corporation Warehouse
-83, Technology Park
-92M, Poly Grave Trailer Park
-95, Architectural Canyon
-100, Shasta Hall
-101, Diablo Hall
-102, Palomar Hall
-103, Whitney Hall
-104, Lassen Hall
-105, Trinity Hall
-106, Santa Lucia Hall
-107, Muir Hall
-108, Sequoia Hall
-109, Fremont Hall
-110, Tenaya Hall
-112, Vista Grande
-113, Sierra Madre Hall
-114, Yosemite Hall
-115, Chase Hall
-116, Jespersen Hall
-117, Heron Hall
-117T, CAD Research Center
-121, Cheda Ranch
-121W, Trestle Vineyard
-122, Parker Ranch
-123, Peterson Ranch
-124, Student Services
-125, Serrano Ranch
-126, Chorro Creek Ranch
-127, Escuela Ranch
-127D, Escuela Beef Center
-130, Grand Avenue Parking Structure
-133, Orfalea Family and ASI Children's Center
-134, Visitor Information
-136, ITRC
-137, Student Experimental Farm
-139, Walter's Ranch
-150, Poultry Science Instructional Center
-153, Bella Montana
-154, Animal Nutrition Center
-155, J & G Lau Family Meat Processing Center
-160, Baggett Stadium
-161, Bob Janssen Field
-170, Cerro Vista Apartments
-170A, Cerro Morro
-170B, Cerro Cabrillo
-170C, Cerro Hollister
-170D, Cerro Romauldo
-170E, Cerro Bishop
-170F, Cerro Islay
-170G, Cerro San Luis
-171, Poly Canyon Village
-171A, Aliso
-171B, Buena Vista
-171C, Corralistos
-171D, Dover
-171E, Estrella
-171F, Foxen
-171G, Gypsum
-171H, Huasna
-171I, Inyo
-180, Warren J. Baker Center for Science and Mathematics
-186, Construction Innovations Center
-186C, Harriet amd Charles Luckman Hall
-187, Simpson Strong-Tie Lab
-192, Engineering IV
-197, Bonderson Engineering Project Center
-271, Village Drive Parking Structure
-371, Canyon Circle Parking Structure
-371B, University Housing Depot
+1, Administration, 1334
+2, Cotchett Education, 1510
+3, Business, 1557
+4, Research Development Center, 108
+5, Architecture & Environmental Design, 1360
+6, Christopher Cohan Performing Arts Center, 1690
+7, Advanced Technology Laboratories, 1007
+8, Bioresource & Agricultural Engineering, 771
+8A, Bioresource & Agricultural Engineering Shop, 568
+9, Farm Shop, 419
+10, Alan A. Erhart Agriculture, 1072
+11, Agricultural Sciences, 816
+13, Engineering, 1156
+14, Frank E. Pilling Computer Science, 1519
+15, Cal Poly Corporation Administration, 777
+16, Beef Unit, 15
+17, Crop Science, 850
+18, Eugene & Rachel Boone Dairy Science Center, 850
+18A, Dairy Products Technology Center, 850
+19, Dining Complex, 1679
+19A, Sandwich Factory, 1579
+20, Engineering East, 1421
+20A, Bert and Candace Forbes Ctr. for Eng. Excellence, 1522
+21, Engineering West, 1515
+22, English, 974
+24, Food Processing, 616
+25, Faculty Offices East, 1281
+26, Graphic Arts, 1771
+26A, Printing Press, 1723
+26M, Graphic Arts Modular Offices, 1771
+27, Health Center, 2123
+28, Albert B. Smith Alumni and Conference Center, 2169
+31, University Housing, 1089
+32, Cal Poly Equine Center, 15
+33, Clyde P. Fisher Science Hall, 1031
+34, Walter F. Dexter Building, 1264
+35, Robert E. Kennedy Library, 1113
+36, University Police, 571
+38, Mathematics and Science, 1169
+40, Engineering South, 1724
+41, Engineering III, 954
+41A, Grant M. Brown Engineering Building, 853
+41B, Baldwin and Mary Reinhold Aerospace Eng. Lab, 1003
+42, Robert A. Matt Physical Education, 1883
+42A, Anderson Aquatic Center, 2034
+43, Recreation Center, 1979
+43A, Kinesiology, 1879
+44, Alex and Fay Spanos Theatre, 1638 
+45, H.P. Davidson Music Center, 1737
+46, Old Natatorium, 1811
+47, Faculty Offices North, 927
+48, Environmental Horticultural Science, 15
+48X, Leaning Pine Arboretum, 15
+50J, E-Surplus, 850
+50L, Rose Float Lab, 850
+51, University House, 2067
+52, Science, 1478
+52B, Science Observatory, 1429
+53, Science North, 1028
+55, Beef Cattle Evaluation Center, 850
+56, Swine Unit, 15
+57, Veterinary Hospital, 850
+58, Welding, 622
+60, Crandall Gymnasium, 1710
+61, Alex G. Spanos Stadium, 1857
+65, Julian A. McPhee University Union, 1534
+70, Facilities, 580
+71, Transportation Services, 534
+74, Building 74, 774
+74M, Building 74 Modular Offices, 774
+76, Old Power House, 1814
+77, Rodeo Arena, 15
+80, Housing Warehouse / Risk Management, 625
+81, Hillcrest, 1086
+82, Corporation Warehouse, 850
+83, Technology Park, 850
+92M, Poly Grave Trailer Park, 1303
+95, Architectural Canyon, 37
+100, Shasta Hall, 834
+101, Diablo Hall, 786
+102, Palomar Hall, 788
+103, Whitney Hall, 937
+104, Lassen Hall, 935
+105, Trinity Hall, 1140
+106, Santa Lucia Hall, 1188
+107, Muir Hall, 1392
+108, Sequoia Hall, 1439
+109, Fremont Hall, 1546
+110, Tenaya Hall, 1593
+112, Vista Grande, 1898
+113, Sierra Madre Hall, 1898
+114, Yosemite Hall, 1898
+115, Chase Hall, 2112
+116, Jespersen Hall, 2160
+117, Heron Hall, 2260
+117T, CAD Research Center, 2358
+121, Cheda Ranch, 850
+121W, Trestle Vineyard, 850
+122, Parker Ranch, 850, 
+123, Peterson Ranch, 37
+124, Student Services, 1962
+125, Serrano Ranch, 850
+126, Chorro Creek Ranch, 850
+127, Escuela Ranch, 850
+127D, Escuela Beef Center, 850
+130, Grand Avenue Parking Structure, 1988
+133, Orfalea Family and ASI Children's Center, 2266
+134, Visitor Information, 2049
+136, ITRC, 26
+137, Student Experimental Farm, 15
+139, Walter's Ranch, 850
+150, Poultry Science Instructional Center, 850
+153, Bella Montana, 850
+154, Animal Nutrition Center, 850
+155, J & G Lau Family Meat Processing Center, 850
+160, Baggett Stadium, 4
+161, Bob Janssen Field, 4
+170, Cerro Vista Apartments, 639
+170A, Cerro Morro, 492
+170B, Cerro Cabrillo, 390
+170C, Cerro Hollister, 339
+170D, Cerro Romauldo, 140
+170E, Cerro Bishop, 142
+170F, Cerro Islay, 343
+170G, Cerro San Luis, 490
+171, Poly Canyon Village, 26
+171A, Aliso, 26
+171B, Buena Vista, 26
+171C, Corralistos, 26
+171D, Dover, 26
+171E, Estrella, 26
+171F, Foxen, 26
+171G, Gypsum, 26
+171H, Huasna, 26
+171I, Inyo, 26
+180, Warren J. Baker Center for Science and Mathematics, 1226
+186, Construction Innovations Center, 1766
+186C, Harriet amd Charles Luckman Hall, 1766
+187, Simpson Strong-Tie Lab, 1717
+192, Engineering IV, 808
+197, Bonderson Engineering Project Center, 910
+271, Village Drive Parking Structure, 26
+371, Canyon Circle Parking Structure, 26
+371B, University Housing Depot, 26

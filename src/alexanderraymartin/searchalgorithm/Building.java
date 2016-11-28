@@ -13,15 +13,17 @@ public class Building implements Serializable {
 
   public String name;
   public String buildingNumber;
+  public int nodeNumber;
 
   /**
    * List of buildings in a user's schedule.
    */
   public static ArrayList<Building> buildings;
 
-  private Building(String buildingNumber, String name) {
+  private Building(String buildingNumber, String name, int nodeNumber) {
     this.buildingNumber = buildingNumber;
     this.name = name;
+    this.nodeNumber = nodeNumber;
   }
 
   /**
@@ -54,7 +56,10 @@ public class Building implements Serializable {
       bufferedReader = new BufferedReader(fileReader);
       while ((line = bufferedReader.readLine()) != null) {
         items = line.split(",");
-        buildings.add(new Building(items[0].trim(), items[1].trim()));
+        String buildingNumber = items[0].trim();
+        String name = items[1].trim();
+        int nodeNumber = Integer.parseInt(items[2].trim());
+        buildings.add(new Building(buildingNumber, name, nodeNumber));
       }
       bufferedReader.close();
     } catch (IOException exception) {

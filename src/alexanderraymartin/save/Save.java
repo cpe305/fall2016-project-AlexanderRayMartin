@@ -7,10 +7,23 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class Save {
 
+  /**
+   * The directory path.
+   */
   public static final String DIRECTORY = System.getProperty("user.home") + "/Documents/Poly Path/";
+  /**
+   * The name of the save file.
+   */
   public static final String SAVE_PATH = "save.data";
+  /**
+   * The static instance of Save.
+   */
   public static Save save;
 
   /**

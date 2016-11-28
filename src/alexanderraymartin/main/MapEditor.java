@@ -14,9 +14,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class MapEditor {
 
+  /**
+   * The graph for the map editor.
+   */
   public Graph graph;
+  /**
+   * True if the program running is in edit mode.
+   */
   public static boolean editMode = false;
 
   /**

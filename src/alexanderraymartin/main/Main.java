@@ -6,6 +6,10 @@ import alexanderraymartin.searchalgorithm.Building;
 import alexanderraymartin.searchalgorithm.Graph;
 import alexanderraymartin.ui.Screen;
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class Main {
 
   /**

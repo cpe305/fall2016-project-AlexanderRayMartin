@@ -14,12 +14,25 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class Map extends JPanel {
 
   private static final long serialVersionUID = 1L;
 
+  /**
+   * Path is blocked.
+   */
   public static final int BLOCKED = -1;
+  /**
+   * Path is available.
+   */
   public static final int AVAILABLE_PATH = 0;
+  /**
+   * Building.
+   */
   public static final int BUILDING = 1;
 
   private Graph graph;
@@ -45,6 +58,7 @@ public class Map extends JPanel {
   /**
    * @Override.
    */
+  @Override
   public void paintComponent(Graphics graphics) {
     AffineTransform at = AffineTransform.getTranslateInstance(xoffset, yoffset);
     BufferedImage image = loadImage(fileName);

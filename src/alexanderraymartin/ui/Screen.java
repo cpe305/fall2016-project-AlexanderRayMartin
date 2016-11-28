@@ -23,15 +23,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class Screen extends JFrame {
 
   private static final long serialVersionUID = 1L;
 
+  /**
+   * The UI width.
+   */
   public static final int UI_WIDTH = 400;
+  /**
+   * The width of the window.
+   */
   public static final int WIDTH = 1000 + UI_WIDTH;
+  /**
+   * The height of the window.
+   */
   public static final int HEIGHT = 1000;
+  /**
+   * Node size.
+   */
   public static final int NODE_SIZE = 20;
 
+  /**
+   * The map for the screen.
+   */
   public Map map;
   private Graph graph;
 
@@ -232,6 +251,9 @@ public class Screen extends JFrame {
     System.out.println("Done!");
   }
 
+  /**
+   * Draw the building nodes.
+   */
   private void drawBuildings() {
     for (int i = 0; i < Building.getBuildings().size(); i++) {
       int xcoord = Building.getBuildings().get(i).nodeNumber % graph.cols;
@@ -241,6 +263,11 @@ public class Screen extends JFrame {
   }
 
   private class ButtonActionListener implements ActionListener {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
     public void actionPerformed(ActionEvent event) {
 
       Object source = event.getSource();
@@ -275,22 +302,47 @@ public class Screen extends JFrame {
   }
 
   private class MouseEventListener implements MouseListener {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+     */
     public void mouseClicked(MouseEvent event) {}
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+     */
     public void mousePressed(MouseEvent event) {
       int startX = event.getX();
       int startY = event.getY();
-      int xcoord = (int) (startX / NODE_SIZE);
-      int ycoord = (int) (startY / NODE_SIZE);
+      int xcoord = startX / NODE_SIZE;
+      int ycoord = startY / NODE_SIZE;
       System.out.println(ycoord * graph.cols + xcoord);
       placeLocations(ycoord, xcoord);
       repaint();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+     */
     public void mouseReleased(MouseEvent event) {}
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+     */
     public void mouseEntered(MouseEvent event) {}
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+     */
     public void mouseExited(MouseEvent event) {}
   }
 }

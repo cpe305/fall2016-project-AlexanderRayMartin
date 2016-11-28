@@ -6,13 +6,26 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class Building implements Serializable {
 
   private static final long serialVersionUID = 1L;
   private static final int ABREVIATE_LENGTH = 25;
 
+  /**
+   * Name of the building.
+   */
   public String name;
+  /**
+   * The building number.
+   */
   public String buildingNumber;
+  /**
+   * The node number.
+   */
   public int nodeNumber;
 
   /**
@@ -72,6 +85,7 @@ public class Building implements Serializable {
    * @param object The Building you are checking to be equal.
    * @return The list of buildings.
    */
+  @Override
   public boolean equals(Object object) {
     if (buildingNumber == ((Building) object).buildingNumber) {
       return true;
@@ -80,6 +94,12 @@ public class Building implements Serializable {
     return false;
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#toString()
+   */
+  @Override
   public String toString() {
     return abbreviateString(ABREVIATE_LENGTH);
   }

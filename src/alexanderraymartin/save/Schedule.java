@@ -5,11 +5,19 @@ import alexanderraymartin.searchalgorithm.Building;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class Schedule implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  /**
+   * ArrayList of all of the possible classes.
+   */
   public ArrayList<Building> classes;
+
   private static Schedule schedule;
 
   private Schedule() {

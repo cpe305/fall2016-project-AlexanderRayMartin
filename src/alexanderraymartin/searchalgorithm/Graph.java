@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * @author Alex Martin.
+ *
+ */
 public class Graph {
 
 
@@ -38,7 +42,13 @@ public class Graph {
   private boolean[] visited;
   private int numVertices;
 
+  /**
+   * The number of rows.
+   */
   public int rows;
+  /**
+   * The number of columns.
+   */
   public int cols;
 
   /**
@@ -404,6 +414,10 @@ public class Graph {
     }
   }
 
+  /**
+   * @author Alex Martin.
+   *
+   */
   public static class Error extends RuntimeException {
     private static final long serialVersionUID = 1L;
 

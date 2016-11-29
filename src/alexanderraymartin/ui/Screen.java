@@ -84,7 +84,7 @@ public class Screen extends JFrame {
     super("Poly Path");
     this.graph = graph;
     graph.makeGraph();
-    map = new Map("src/mapZoom.png", 1, 0, 0, graph);
+    map = new Map("mapZoom.png", 1, 0, 0, graph);
     mouseListener = new MouseEventListener();
     buttonListener = new ButtonActionListener();
     buttonListener = new ButtonActionListener();

@@ -5,14 +5,10 @@ import alexanderraymartin.searchalgorithm.Building;
 import alexanderraymartin.searchalgorithm.Graph;
 import alexanderraymartin.ui.Screen;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * @author Alex Martin.
@@ -55,46 +51,6 @@ public class MapEditor {
    */
   public static void setEditMode(boolean value) {
     editMode = value;
-  }
-
-  /**
-   * @param file The file to open.
-   * @return A FileReader with the new file.
-   */
-  public static FileReader openFile(String file) {
-    FileReader fileReader = null;
-    try {
-      fileReader = new FileReader(file);
-    } catch (FileNotFoundException exception) {
-      exception.printStackTrace();
-    }
-    return fileReader;
-  }
-
-  /**
-   * @param fileReader The file to convert to an array.
-   * @return The integer array.
-   */
-  public static int[] getArray(FileReader fileReader) {
-    ArrayList<Integer> arrayList = new ArrayList<Integer>();
-    int[] array = null;
-    String line;
-    String[] items;
-    BufferedReader bufferedReader;
-    try {
-      bufferedReader = new BufferedReader(fileReader);
-      while ((line = bufferedReader.readLine()) != null) {
-        items = line.split(" ");
-        for (int i = 0; i < items.length; i++) {
-          arrayList.add(Integer.parseInt(items[i].trim()));
-        }
-      }
-      array = arrayList.stream().mapToInt(i -> i).toArray();
-      bufferedReader.close();
-    } catch (IOException exception) {
-      exception.printStackTrace();
-    }
-    return array;
   }
 
   /**

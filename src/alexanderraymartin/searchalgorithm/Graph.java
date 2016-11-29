@@ -1,12 +1,14 @@
 package alexanderraymartin.searchalgorithm;
 
+import alexanderraymartin.main.Main;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -21,7 +23,7 @@ public class Graph {
   /**
    * Path for the text file containing the map node information.
    */
-  private final String mapNodeFile = "src/mapNode.txt";
+  private final String mapNodeFile = "mapNode.txt";
   /**
    * Adjacency matrix.
    */
@@ -182,30 +184,26 @@ public class Graph {
 
   /**
    * @param file The file's path.
-   * @return A FileReader with the file.
+   * @return A BufferedReader with the file.
    */
-  public static FileReader openFile(String file) {
-    FileReader fileReader = null;
-    try {
-      fileReader = new FileReader(file);
-    } catch (FileNotFoundException exception) {
-      exception.printStackTrace();
-    }
-    return fileReader;
+  public static BufferedReader openFile(String file) {
+    BufferedReader bufferedReader = null;
+    InputStream inputStream = Main.class.getClassLoader().getResourceAsStream(file);
+    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+    return bufferedReader;
   }
 
   /**
-   * @param fileReader The FileReader for a file that will be converted into an array.
+   * @param bufferedReader The FileReader for a file that will be converted into an array.
    * @return The integer array.
    */
-  public static int[] getArray(FileReader fileReader) {
+  public static int[] getArray(BufferedReader bufferedReader) {
     ArrayList<Integer> arrayList = new ArrayList<Integer>();
     int[] array = null;
     String line;
     String[] items;
-    BufferedReader bufferedReader;
     try {
-      bufferedReader = new BufferedReader(fileReader);
+      bufferedReader = new BufferedReader(bufferedReader);
       while ((line = bufferedReader.readLine()) != null) {
         items = line.split("\\s+");
         for (int i = 0; i < items.length; i++) {

@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -124,7 +123,7 @@ public class Map extends JPanel {
   private BufferedImage loadImage(String fileName) {
     BufferedImage image = null;
     try {
-      image = ImageIO.read(new File(fileName));
+      image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(fileName));
     } catch (IOException exception) {
       exception.printStackTrace();
     }

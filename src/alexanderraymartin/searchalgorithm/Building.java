@@ -1,7 +1,6 @@
 package alexanderraymartin.searchalgorithm;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -70,25 +69,24 @@ public class Building implements Serializable {
     if (buildings == null) {
       buildings = new ArrayList<Building>();
 
-      FileReader file = Graph.openFile("src/classNumbers.txt");
+      BufferedReader bufferedReader = Graph.openFile("classNumbers.txt");
 
-      loadBuildings(file);
+      loadBuildings(bufferedReader);
     }
 
     return buildings;
   }
 
   /**
-   * Converts a file from a FileReader into an array of buildings.
+   * Converts a file from a BufferedReader into an array of buildings.
    * 
-   * @param fileReader The FileReader of a file containing the buildings.
+   * @param bufferedReader The BufferedReader of a file containing the buildings.
    */
-  private static void loadBuildings(FileReader fileReader) {
+  private static void loadBuildings(BufferedReader bufferedReader) {
     String line;
     String[] items;
-    BufferedReader bufferedReader;
     try {
-      bufferedReader = new BufferedReader(fileReader);
+      bufferedReader = new BufferedReader(bufferedReader);
       while ((line = bufferedReader.readLine()) != null) {
         items = line.split(",");
         String buildingNumber = items[0].trim();

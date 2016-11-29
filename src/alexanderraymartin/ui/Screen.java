@@ -191,8 +191,9 @@ public class Screen extends JFrame {
 
     classLabels.add(new JLabel(Schedule.getInstance().getClasses().get(index).toString()));
     classLabels.get(index).setFont(buttonFont);
-    classLabels.get(index).setForeground(new Color(0x0000ff << (index * 5)));
     classNamePanel.add(classLabels.get(index));
+
+    setLabelColor();
 
     pack();
   }
@@ -207,7 +208,15 @@ public class Screen extends JFrame {
     classLabels.remove(index);
     classNamePanel.remove(index);
 
+    setLabelColor();
+
     pack();
+  }
+
+  private void setLabelColor() {
+    for (int i = 0; i < classLabels.size(); i++) {
+      classLabels.get(i).setForeground(new Color(0x0000ff << (i * 5)));
+    }
   }
 
   /**

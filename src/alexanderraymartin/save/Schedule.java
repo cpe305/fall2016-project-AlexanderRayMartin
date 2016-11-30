@@ -4,6 +4,7 @@ import alexanderraymartin.searchalgorithm.Building;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Alex Martin.
@@ -21,7 +22,7 @@ public class Schedule implements Serializable {
   private static Schedule schedule;
 
   private Schedule() {
-    classes = new ArrayList<Building>();
+    classes = new ArrayList<>();
   }
 
   /**
@@ -37,14 +38,14 @@ public class Schedule implements Serializable {
   /**
    * @return ArrayList of all of the possible classes.
    */
-  public ArrayList<Building> getClasses() {
+  public List<Building> getClasses() {
     return classes;
   }
 
   /**
    * @param schedule The instance of schedule.
    */
-  public void setSchedule(Schedule schedule) {
+  public static void setSchedule(Schedule schedule) {
     Schedule.schedule = schedule;
   }
 

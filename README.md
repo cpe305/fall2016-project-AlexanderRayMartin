@@ -24,6 +24,9 @@ https://cpe305.github.io/fall2016-project-AlexanderRayMartin/
 - Singleton Pattern  
  - Save Functionality  
  - User Schedule  
+- Observer Pattern
+ - Button Listener
+ - Mouse Listener
  
 **Support or Contact**  
 @AlexanderRayMartin  

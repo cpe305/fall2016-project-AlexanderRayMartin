@@ -34,7 +34,6 @@ public class Screen extends JFrame {
   private static final long serialVersionUID = 1L;
 
   private static final String FONT_TITLE = "Courier";
-
   /**
    * The UI width.
    */

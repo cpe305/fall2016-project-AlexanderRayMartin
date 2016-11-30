@@ -57,7 +57,7 @@ public class Save {
       outputStream.close();
       fileOutputStream.close();
     } catch (IOException exception) {
-      Main.getLogger().fine(exception.toString());
+      Main.getLogger().info(exception.toString());
       exception.printStackTrace();
     }
   }
@@ -77,7 +77,7 @@ public class Save {
       inputStream.close();
       fileInputStream.close();
     } catch (IOException | ClassNotFoundException exception) {
-      Main.getLogger().fine(exception.toString());
+      Main.getLogger().info(exception.toString());
       exception.printStackTrace();
       Main.getLogger().fine("Corrupted save file");
       saveSchedule();

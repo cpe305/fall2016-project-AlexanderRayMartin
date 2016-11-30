@@ -97,7 +97,7 @@ public class Building implements Serializable {
       }
       bufferedReader.close();
     } catch (IOException exception) {
-      Main.getLogger().fine(exception.toString());
+      Main.getLogger().info(exception.toString());
       exception.printStackTrace();
     }
   }

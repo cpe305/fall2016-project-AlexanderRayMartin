@@ -179,7 +179,7 @@ public class Graph {
       bw.close();
       fw.close();
     } catch (IOException exception) {
-      Main.getLogger().fine(exception.toString());
+      Main.getLogger().info(exception.toString());
       exception.printStackTrace();
     }
   }
@@ -214,7 +214,7 @@ public class Graph {
       array = arrayList.stream().mapToInt(i -> i).toArray();
       bufferedReader.close();
     } catch (IOException exception) {
-      Main.getLogger().fine(exception.toString());
+      Main.getLogger().info(exception.toString());
       exception.printStackTrace();
     }
     return array;

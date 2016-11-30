@@ -189,7 +189,7 @@ public class Screen extends JFrame {
     removeClassButtons.get(index).addActionListener(buttonListener);
     removeButtonPanel.add(removeClassButtons.get(index));
 
-    classLabels.add(new JLabel(Schedule.getInstance().getClasses().get(index).toString()));
+    classLabels.add(new JLabel(Schedule.getInstance().getClasses().get(index).padString()));
     classLabels.get(index).setFont(buttonFont);
     classNamePanel.add(classLabels.get(index));
 

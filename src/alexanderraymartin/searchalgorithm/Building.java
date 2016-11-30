@@ -137,4 +137,21 @@ public class Building implements Serializable {
     return buildingNumber + " " + temp;
   }
 
+  /**
+   * @return The string with '...' or padded with spaces.
+   */
+  public String padString() {
+    String temp = name;
+    int length = ABREVIATE_LENGTH;
+    if (name.length() > length) {
+      temp = name.substring(0, length - buildingNumber.length());
+      temp = temp + "...";
+    } else if (name.length() < length) {
+      for (int i = 0; i < length; i++) {
+        temp = temp + " ";
+      }
+    }
+    return buildingNumber + " " + temp;
+  }
+
 }

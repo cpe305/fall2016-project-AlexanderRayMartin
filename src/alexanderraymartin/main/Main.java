@@ -18,10 +18,7 @@ public class Main {
 
   private static Logger log;
 
-  /**
-   * @param args Command line arguments.
-   */
-  public static void main(String[] args) {
+  private Main() {
     MapEditor.setEditMode(false);
     Building.getBuildings();
     Save.getInstance();
@@ -42,5 +39,12 @@ public class Main {
       log.addHandler(handler);
     }
     return log;
+  }
+
+  /**
+   * @param args Command line arguments.
+   */
+  public static void main(String[] args) {
+    new Main();
   }
 }

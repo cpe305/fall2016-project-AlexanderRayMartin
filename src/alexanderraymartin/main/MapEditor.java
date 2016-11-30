@@ -83,7 +83,7 @@ public class MapEditor {
       bw.close();
       fw.close();
     } catch (IOException exception) {
-      Main.getLogger().fine("Exception!");
+      Main.getLogger().fine(exception.toString());
       exception.printStackTrace();
     }
   }

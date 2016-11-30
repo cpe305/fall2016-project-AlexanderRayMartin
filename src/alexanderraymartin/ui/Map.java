@@ -126,7 +126,7 @@ public class Map extends JPanel {
     try {
       image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(fileName));
     } catch (IOException exception) {
-      Main.getLogger().fine("Exception!");
+      Main.getLogger().fine(exception.toString());
       exception.printStackTrace();
     }
 

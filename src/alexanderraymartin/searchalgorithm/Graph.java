@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.logging.Level;
 
@@ -24,7 +25,7 @@ public class Graph {
   /**
    * Path for the text file containing the map node information.
    */
-  private final String mapNodeFile = "mapNode.txt";
+  private static final String mapNodeFile = "mapNode.txt";
   /**
    * Adjacency matrix.
    */
@@ -75,6 +76,8 @@ public class Graph {
   }
 
   /**
+   * @param xcoord The x coordinate.
+   * @param ycoord The y coordinate.
    * @return Nodes array.
    */
   public int getNodes(int xcoord, int ycoord) {
@@ -107,9 +110,9 @@ public class Graph {
   /**
    * @return Creates an arrayList if schedulePaths is null, and returns it.
    */
-  public static ArrayList<int[]> getSchedulePaths() {
+  public static List<int[]> getSchedulePaths() {
     if (schedulePaths == null) {
-      schedulePaths = new ArrayList<int[]>();
+      schedulePaths = new ArrayList<>();
     }
     return schedulePaths;
   }
@@ -117,9 +120,9 @@ public class Graph {
   /**
    * @return Creates an arrayList if buildingNodes is null, and returns it.
    */
-  public static ArrayList<Integer> getBuildingNodes() {
+  public static List<Integer> getBuildingNodes() {
     if (buildingNodes == null) {
-      buildingNodes = new ArrayList<Integer>();
+      buildingNodes = new ArrayList<>();
     }
     return buildingNodes;
   }
@@ -128,8 +131,8 @@ public class Graph {
    * Creates a new arrayList for schedulePaths.
    */
   public static void clearSchedulePaths() {
-    schedulePaths = new ArrayList<int[]>();
-    buildingNodes = new ArrayList<Integer>();
+    schedulePaths = new ArrayList<>();
+    buildingNodes = new ArrayList<>();
   }
 
   private int[][] createNodes() {
@@ -151,7 +154,7 @@ public class Graph {
    * Saves the node grid to the file.
    */
   public void saveNodes() {
-    File file = new File("src/mapNode.txt");
+    File file = new File("src/mapNode_temp.txt");
     FileWriter fw;
     Main.getLogger().fine("Saving nodes");
     try {
@@ -166,11 +169,7 @@ public class Graph {
       for (int y = 0; y < rows; y++) {
         for (int x = 0; x < cols; x++) {
           bw.write(String.valueOf(nodes[y][x]));
-          if (nodes[y][x] == -1) {
-            bw.write(" ");
-          } else {
-            bw.write("  ");
-          }
+          bw.write(" ");
         }
         if (y != rows - 1) {
           bw.newLine();
@@ -200,7 +199,7 @@ public class Graph {
    * @return The integer array.
    */
   public static int[] getArray(BufferedReader bufferedReader) {
-    ArrayList<Integer> arrayList = new ArrayList<Integer>();
+    ArrayList<Integer> arrayList = new ArrayList<>();
     int[] array = null;
     String line;
     String[] items;
@@ -306,10 +305,8 @@ public class Graph {
    * @param x0 X initial.
    */
   private void checkEdge(int ycoord, int xcoord, int y0, int x0) {
-    if (inBoundary(ycoord, xcoord)) { // check boundary
-      if (nodes[ycoord][xcoord] != -1) {
-        addEdge(y0 * cols + x0, ycoord * cols + xcoord);
-      }
+    if (inBoundary(ycoord, xcoord) && nodes[ycoord][xcoord] != -1) {
+      addEdge(y0 * cols + x0, ycoord * cols + xcoord);
     }
   }
 
@@ -363,7 +360,7 @@ public class Graph {
    */
   public boolean isPath(int start, int stop) { //
     visitHelper(start);
-    if (visited[stop] == true) {
+    if (visited[stop]) {
       return true;
     }
     return false;
@@ -379,7 +376,7 @@ public class Graph {
   private void visit(int start) { // visits each element
     visited[start] = true;
     for (int i = 0; i < getNumVertices(); i++) {
-      if (adj[start][i] == 1 && visited[i] == false) {
+      if (adj[start][i] == 1 && !visited[i]) {
         visit(i);
       }
     }

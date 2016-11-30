@@ -33,6 +33,8 @@ public class Screen extends JFrame {
 
   private static final long serialVersionUID = 1L;
 
+  private static final String fontTitle = "Courier";
+
   /**
    * The UI width.
    */
@@ -40,11 +42,11 @@ public class Screen extends JFrame {
   /**
    * The width of the window.
    */
-  public static final int WIDTH = 1000 + UI_WIDTH;
+  public static final int SCREEN_WIDTH = 1000 + UI_WIDTH;
   /**
    * The height of the window.
    */
-  public static final int HEIGHT = 1000;
+  public static final int SCREEN_HEIGHT = 1000;
   /**
    * Node size.
    */
@@ -75,28 +77,30 @@ public class Screen extends JFrame {
   private ArrayList<JButton> removeClassButtons;
   private ArrayList<JLabel> classLabels;
 
-  private transient ButtonActionListener buttonListener;
-  private transient MouseEventListener mouseListener;
+  private transient ButtonActionListener myButtonListener;
+  private transient MouseEventListener myMouseListener;
 
   /**
    * Creates the window.
+   * 
+   * @param graph The graph for the map.
    */
   public Screen(Graph graph) {
     super("Poly Path");
     this.graph = graph;
     graph.makeGraph();
     map = new Map("mapZoom.png", 1, 0, 0, graph);
-    mouseListener = new MouseEventListener();
-    buttonListener = new ButtonActionListener();
-    buttonListener = new ButtonActionListener();
+    myMouseListener = new MouseEventListener();
+    myButtonListener = new ButtonActionListener();
+    myButtonListener = new ButtonActionListener();
     uiPanel = new JPanel();
-    uiPanel.setPreferredSize(new Dimension(UI_WIDTH, HEIGHT));
+    uiPanel.setPreferredSize(new Dimension(UI_WIDTH, SCREEN_HEIGHT));
     uiPanel.setLayout(new BoxLayout(uiPanel, BoxLayout.Y_AXIS));
     add(uiPanel, BorderLayout.WEST);
     add(map);
     createInterface();
     setVisible(true);
-    setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
     setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     pack();
@@ -107,11 +111,11 @@ public class Screen extends JFrame {
    * Creates the interface.
    */
   public void createInterface() {
-    final Font buttonFont = new Font("Courier", Font.PLAIN, 20);
+    final Font buttonFont = new Font(fontTitle, Font.PLAIN, 20);
     final Dimension buttonSize = new Dimension(175, 50);
 
-    removeClassButtons = new ArrayList<JButton>();
-    classLabels = new ArrayList<JLabel>();
+    removeClassButtons = new ArrayList<>();
+    classLabels = new ArrayList<>();
 
     schedulePanel = new JPanel();
     classPanel = new JPanel();
@@ -128,25 +132,25 @@ public class Screen extends JFrame {
     classPanel.add(classNamePanel);
 
     scheduleLabel = new JLabel("Schedule");
-    scheduleLabel.setFont(new Font("Courier", Font.BOLD, 50));
+    scheduleLabel.setFont(new Font(fontTitle, Font.BOLD, 50));
     schedulePanel.add(scheduleLabel);
 
     addClass = new JButton("Add");
     addClass.setFont(buttonFont);
     addClass.setPreferredSize(buttonSize);
-    addClass.addActionListener(buttonListener);
+    addClass.addActionListener(myButtonListener);
 
     save = new JButton("Save");
     save.setFont(buttonFont);
     save.setPreferredSize(buttonSize);
-    save.addActionListener(buttonListener);
+    save.addActionListener(myButtonListener);
 
     findPath = new JButton("Find Path");
     findPath.setFont(buttonFont);
     findPath.setPreferredSize(buttonSize);
-    findPath.addActionListener(buttonListener);
+    findPath.addActionListener(myButtonListener);
 
-    selectClass = new JComboBox<Building>(
+    selectClass = new JComboBox<>(
         Building.getBuildings().toArray(new Building[Building.getBuildings().size()]));
     selectClass.setFont(buttonFont);
     selectClass.setMaximumRowCount(10);
@@ -168,46 +172,31 @@ public class Screen extends JFrame {
    * Creates the interface for editor mode.
    */
   public void createEditorInterface() {
-    final Font buttonFont = new Font("Courier", Font.PLAIN, 20);
+    final Font buttonFont = new Font(fontTitle, Font.PLAIN, 20);
     final Dimension buttonSize = new Dimension(175, 50);
     editorSave = new JButton("Export");
     editorSave.setFont(buttonFont);
     editorSave.setPreferredSize(buttonSize);
-    editorSave.addActionListener(buttonListener);
+    editorSave.addActionListener(myButtonListener);
     schedulePanel.add(editorSave);
-    map.addMouseListener(mouseListener);
+    map.addMouseListener(myMouseListener);
     drawBuildings();
     pack();
   }
 
   private void addClass(int index) {
-    Font buttonFont = new Font("Courier", Font.PLAIN, 20);
+    Font buttonFont = new Font(fontTitle, Font.PLAIN, 20);
     Dimension buttonSize = new Dimension(125, 20);
 
     removeClassButtons.add(new JButton("X"));
     removeClassButtons.get(index).setFont(buttonFont);
     removeClassButtons.get(index).setPreferredSize(buttonSize);
-    removeClassButtons.get(index).addActionListener(buttonListener);
+    removeClassButtons.get(index).addActionListener(myButtonListener);
     removeButtonPanel.add(removeClassButtons.get(index));
 
     classLabels.add(new JLabel(Schedule.getInstance().getClasses().get(index).padString()));
     classLabels.get(index).setFont(buttonFont);
     classNamePanel.add(classLabels.get(index));
-
-    setLabelColor();
-
-    pack();
-  }
-
-  private void removeClass(int index) {
-    Schedule.getInstance().getClasses().remove(index);
-
-    removeClassButtons.get(index).removeActionListener(buttonListener);
-    removeClassButtons.remove(index);
-    removeButtonPanel.remove(index);
-
-    classLabels.remove(index);
-    classNamePanel.remove(index);
 
     setLabelColor();
 
@@ -235,35 +224,6 @@ public class Screen extends JFrame {
   }
 
   /**
-   * Place a node at the mouse click.
-   * 
-   * @param ycoord The y coordinate of the mouse.
-   * @param xcoord The x coordinate of the mouse.
-   */
-  private void placeLocations(int ycoord, int xcoord) {
-    if (inBoundary(ycoord, xcoord)) {
-      if (graph.getNodes(xcoord, ycoord) == Map.BLOCKED) {
-        graph.setNode(xcoord, ycoord, Map.AVAILABLE_PATH);
-      } else if (graph.getNodes(xcoord, ycoord) == Map.AVAILABLE_PATH) {
-        graph.setNode(xcoord, ycoord, Map.BLOCKED);
-      }
-    }
-  }
-
-  /**
-   * Find the path.
-   */
-  private void findPath(int start, int end) {
-    int[] path = graph.getPath(start, end);
-    Graph.getSchedulePaths().add(path);
-    for (int i = 0; i < path.length; i++) {
-      Main.getLogger().fine(String.valueOf(path[i]));
-    }
-    repaint();
-    Main.getLogger().fine("Done!");
-  }
-
-  /**
    * Draw the building nodes.
    */
   private void drawBuildings() {
@@ -280,6 +240,7 @@ public class Screen extends JFrame {
      * 
      * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
      */
+    @Override
     public void actionPerformed(ActionEvent event) {
 
       Object source = event.getSource();
@@ -315,6 +276,34 @@ public class Screen extends JFrame {
       }
 
     }
+
+    private void removeClass(int index) {
+      Schedule.getInstance().getClasses().remove(index);
+
+      removeClassButtons.get(index).removeActionListener(myButtonListener);
+      removeClassButtons.remove(index);
+      removeButtonPanel.remove(index);
+
+      classLabels.remove(index);
+      classNamePanel.remove(index);
+
+      setLabelColor();
+
+      pack();
+    }
+
+    /**
+     * Find the path.
+     */
+    private void findPath(int start, int end) {
+      int[] path = graph.getPath(start, end);
+      Graph.getSchedulePaths().add(path);
+      for (int i = 0; i < path.length; i++) {
+        Main.getLogger().fine(String.valueOf(path[i]));
+      }
+      repaint();
+      Main.getLogger().fine("Done!");
+    }
   }
 
   private class MouseEventListener implements MouseListener {
@@ -323,13 +312,19 @@ public class Screen extends JFrame {
      * 
      * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
      */
-    public void mouseClicked(MouseEvent event) {}
+    @Override
+    public void mouseClicked(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
 
     /*
      * (non-Javadoc)
      * 
      * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
      */
+    @Override
     public void mousePressed(MouseEvent event) {
       int startX = event.getX();
       int startY = event.getY();
@@ -345,20 +340,51 @@ public class Screen extends JFrame {
      * 
      * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
      */
-    public void mouseReleased(MouseEvent event) {}
+    @Override
+    public void mouseReleased(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
 
     /*
      * (non-Javadoc)
      * 
      * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
      */
-    public void mouseEntered(MouseEvent event) {}
+    @Override
+    public void mouseEntered(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
 
     /*
      * (non-Javadoc)
      * 
      * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
      */
-    public void mouseExited(MouseEvent event) {}
+    @Override
+    public void mouseExited(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
+
+    /**
+     * Place a node at the mouse click.
+     * 
+     * @param ycoord The y coordinate of the mouse.
+     * @param xcoord The x coordinate of the mouse.
+     */
+    private void placeLocations(int ycoord, int xcoord) {
+      if (inBoundary(ycoord, xcoord)) {
+        if (graph.getNodes(xcoord, ycoord) == Map.BLOCKED) {
+          graph.setNode(xcoord, ycoord, Map.AVAILABLE_PATH);
+        } else if (graph.getNodes(xcoord, ycoord) == Map.AVAILABLE_PATH) {
+          graph.setNode(xcoord, ycoord, Map.BLOCKED);
+        }
+      }
+    }
   }
 }

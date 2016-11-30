@@ -47,6 +47,7 @@ public class Map extends JPanel {
    * @param scale The amount to scale the image.
    * @param xoffset The offset along the x axis.
    * @param yoffset The offset along the y axis.
+   * @param graph The graph for the map.
    */
   public Map(String fileName, double scale, int xoffset, int yoffset, Graph graph) {
     this.fileName = fileName;
@@ -65,7 +66,7 @@ public class Map extends JPanel {
     BufferedImage image = loadImage(fileName);
     at.scale(scale, scale);
     Graphics2D g2 = (Graphics2D) graphics;
-    int size = Screen.HEIGHT / graph.getRows();
+    int size = Screen.SCREEN_HEIGHT / graph.getRows();
 
     // draw image
     g2.drawImage(image, at, null);
@@ -117,7 +118,7 @@ public class Map extends JPanel {
    */
   public void drawSquare(Graphics graphics, Color color, int xcoord, int ycoord) {
     Graphics2D g2 = (Graphics2D) graphics;
-    int size = Screen.HEIGHT / graph.getRows();
+    int size = Screen.SCREEN_HEIGHT / graph.getRows();
     g2.setColor(color);
     g2.fillRect((int) ((xcoord + 0.25) * size), (int) ((ycoord + 0.25) * size), size / 2, size / 2);
   }

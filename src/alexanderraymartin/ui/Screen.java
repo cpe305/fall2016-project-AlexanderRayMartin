@@ -53,7 +53,7 @@ public class Screen extends JFrame {
    * The map for the screen.
    */
   private Map map;
-  private Graph graph;
+  private transient Graph graph;
 
   private JLabel scheduleLabel;
   private JPanel uiPanel;
@@ -74,8 +74,8 @@ public class Screen extends JFrame {
   private ArrayList<JButton> removeClassButtons;
   private ArrayList<JLabel> classLabels;
 
-  private ButtonActionListener buttonListener;
-  private MouseEventListener mouseListener;
+  private transient ButtonActionListener buttonListener;
+  private transient MouseEventListener mouseListener;
 
   /**
    * Creates the window.

@@ -177,6 +177,7 @@ public class Graph {
       }
 
       bw.close();
+      fw.close();
     } catch (IOException exception) {
       exception.printStackTrace();
     }
@@ -187,7 +188,7 @@ public class Graph {
    * @return A BufferedReader with the file.
    */
   public static BufferedReader openFile(String file) {
-    BufferedReader bufferedReader = null;
+    BufferedReader bufferedReader;
     InputStream inputStream = Main.class.getClassLoader().getResourceAsStream(file);
     bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
     return bufferedReader;
@@ -203,7 +204,6 @@ public class Graph {
     String line;
     String[] items;
     try {
-      bufferedReader = new BufferedReader(bufferedReader);
       while ((line = bufferedReader.readLine()) != null) {
         items = line.split("\\s+");
         for (int i = 0; i < items.length; i++) {
@@ -395,7 +395,7 @@ public class Graph {
     Queue<Integer> queue = new LinkedList<>();
     Queue<Integer> tempQueue = new LinkedList<>();
     queue.add(start);
-    int current = start;
+    int current;
     int count = 1;
     if (!isPath(start, stop)) {
       return -1; // no path: -1 is escape value for other functions
@@ -439,18 +439,6 @@ public class Graph {
         }
       }
       count++;
-    }
-  }
-
-  /**
-   * @author Alex Martin.
-   *
-   */
-  public static class Error extends RuntimeException {
-    private static final long serialVersionUID = 1L;
-
-    public Error(String message) {
-      super(message);
     }
   }
 }

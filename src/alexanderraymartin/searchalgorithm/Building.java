@@ -86,7 +86,6 @@ public class Building implements Serializable {
     String line;
     String[] items;
     try {
-      bufferedReader = new BufferedReader(bufferedReader);
       while ((line = bufferedReader.readLine()) != null) {
         items = line.split(",");
         String buildingNumber = items[0].trim();

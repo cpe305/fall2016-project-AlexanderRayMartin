@@ -33,7 +33,7 @@ public class ShortestPathTest extends Applet {
   private int[][] maze;
 
   // graph that holds the edges
-  private Graph graph;
+  private transient Graph graph;
 
   // number of rows and columns in the maze
   private int rows;
@@ -87,8 +87,8 @@ public class ShortestPathTest extends Applet {
   private ButtonGroup radioButtonGroup;
 
   // this listener object responds to button events
-  private ButtonActionListener buttonListener;
-  private MouseEventListener myMouseListener;
+  private transient ButtonActionListener buttonListener;
+  private transient MouseEventListener myMouseListener;
 
   private enum State {
     DISPLAY_SHORTEST_PATH, ADVANCE, ADD_BLOCK, NEED_START, NEED_END
@@ -269,10 +269,10 @@ public class ShortestPathTest extends Applet {
           maze[y][x] = scanner.nextInt();
         }
       }
+      scanner.close();
       mazeField.paint(mazeField.getGraphics());
       needMaze = false;
       needLocations = true;
-      scanner.close();
       makeGraph(); // make the graph
       return true;
     } catch (Exception exception) {

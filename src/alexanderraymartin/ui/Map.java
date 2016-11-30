@@ -34,7 +34,7 @@ public class Map extends JPanel {
    */
   public static final int BUILDING = 1;
 
-  private Graph graph;
+  private transient Graph graph;
   private String fileName;
   private double scale;
   private int xoffset;

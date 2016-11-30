@@ -35,7 +35,6 @@ public class MapEditor {
     graph = new Graph();
     Screen screen = new Screen(graph);
     screen.createEditorInterface();
-    // createBlankNodeMap(50, 50);
   }
 
 
@@ -62,7 +61,7 @@ public class MapEditor {
   public static void createBlankNodeMap(int rows, int cols) {
     File file = new File("src/mapNode_temp.txt");
     FileWriter fw;
-    System.out.println("Creating blank node map");
+    Main.getLogger().fine("Creating blank node map");
     try {
       fw = new FileWriter(file);
       BufferedWriter bw = new BufferedWriter(fw);

@@ -1,5 +1,6 @@
 package alexanderraymartin.ui;
 
+import alexanderraymartin.main.Main;
 import alexanderraymartin.main.MapEditor;
 import alexanderraymartin.save.Save;
 import alexanderraymartin.save.Schedule;
@@ -256,10 +257,10 @@ public class Screen extends JFrame {
     int[] path = graph.getPath(start, end);
     Graph.getSchedulePaths().add(path);
     for (int i = 0; i < path.length; i++) {
-      System.out.println(path[i]);
+      Main.getLogger().fine(String.valueOf(path[i]));
     }
     repaint();
-    System.out.println("Done!");
+    Main.getLogger().fine("Done!");
   }
 
   /**
@@ -286,12 +287,12 @@ public class Screen extends JFrame {
       if (source == addClass) {
         Schedule.getInstance().getClasses().add((Building) selectClass.getSelectedItem());
         addClass(Schedule.getInstance().getClasses().size() - 1);
-        System.out.println(
-            "Adding class: " + ((Building) selectClass.getSelectedItem()).getBuildingNumber() + " "
-                + ((Building) selectClass.getSelectedItem()).getName());
+        Main.getLogger()
+            .fine("Adding class: " + ((Building) selectClass.getSelectedItem()).getBuildingNumber()
+                + " " + ((Building) selectClass.getSelectedItem()).getName());
 
       } else if (source == save) {
-        System.out.println("Saving...");
+        Main.getLogger().fine("Saving...");
         Save.getInstance().saveSchedule();
       } else if (removeClassButtons.contains(source)) {
         removeClass(removeClassButtons.indexOf(source));
@@ -334,7 +335,7 @@ public class Screen extends JFrame {
       int startY = event.getY();
       int xcoord = startX / NODE_SIZE;
       int ycoord = startY / NODE_SIZE;
-      System.out.println(ycoord * graph.getCols() + xcoord);
+      Main.getLogger().fine(String.valueOf(ycoord * graph.getCols() + xcoord));
       placeLocations(ycoord, xcoord);
       repaint();
     }

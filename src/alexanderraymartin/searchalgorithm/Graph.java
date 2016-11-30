@@ -152,7 +152,7 @@ public class Graph {
   public void saveNodes() {
     File file = new File("src/mapNode.txt");
     FileWriter fw;
-    System.out.println("Saving nodes");
+    Main.getLogger().fine("Saving nodes");
     try {
       fw = new FileWriter(file);
       BufferedWriter bw = new BufferedWriter(fw);

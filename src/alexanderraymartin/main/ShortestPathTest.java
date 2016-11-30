@@ -104,7 +104,7 @@ public class ShortestPathTest extends Applet {
    */
   @Override
   public void init() {
-    System.out.println("Maze started"); // goes to console
+    Main.getLogger().fine("Maze started"); // goes to console
     inTestMode = false;
     needMaze = true;
     needLocations = true;

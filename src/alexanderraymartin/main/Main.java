@@ -1,16 +1,22 @@
 package alexanderraymartin.main;
 
 import alexanderraymartin.save.Save;
-import alexanderraymartin.save.Schedule;
 import alexanderraymartin.searchalgorithm.Building;
 import alexanderraymartin.searchalgorithm.Graph;
 import alexanderraymartin.ui.Screen;
+
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author Alex Martin.
  *
  */
 public class Main {
+
+  public static Logger log;
 
   /**
    * @param args Command line arguments.
@@ -21,18 +27,20 @@ public class Main {
     Save.getInstance();
     Graph graph = new Graph();
     new Screen(graph);
+  }
 
-    // test loading buildings
-    for (int i = 0; i < Building.getBuildings().size(); i++) {
-      System.out.println("Name: " + Building.getBuildings().get(i).getName()
-          + " | Building Number: " + Building.getBuildings().get(i).getBuildingNumber()
-          + " | Node Number: " + Building.getBuildings().get(i).getNodeNumber());
+  /**
+   * @return A logger to the console.
+   */
+  public static Logger getLogger() {
+    if (log == null) {
+      log = Logger.getLogger("MyLogger");
+      log.setLevel(Level.ALL);
+      ConsoleHandler handler = new ConsoleHandler();
+      handler.setLevel(Level.ALL);
+      handler.setFormatter(new SimpleFormatter());
+      log.addHandler(handler);
     }
-
-    // test adding classes to schedule
-    System.out.println("\nSchedule: ");
-    for (int i = 0; i < Schedule.getInstance().getClasses().size(); i++) {
-      System.out.println(Schedule.getInstance().getClasses().get(i));
-    }
+    return log;
   }
 }

@@ -1,5 +1,7 @@
 package alexanderraymartin.save;
 
+import alexanderraymartin.main.Main;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -75,7 +77,7 @@ public class Save {
       fileInputStream.close();
     } catch (IOException | ClassNotFoundException exception) {
       exception.printStackTrace();
-      System.out.println("Corrupted save file");
+      Main.getLogger().fine("Corrupted save file");
       saveSchedule();
     }
   }
@@ -87,10 +89,10 @@ public class Save {
     File file = new File(DIRECTORY);
     {
       if (!file.exists()) {
-        System.out.println("Creating: " + file);
+        Main.getLogger().fine("Creating: " + file);
         boolean successful = file.mkdirs();
         if (successful) {
-          System.out.println("Folders created!");
+          Main.getLogger().fine("Folders created!");
         }
       }
     }

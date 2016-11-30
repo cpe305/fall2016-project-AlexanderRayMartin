@@ -110,11 +110,20 @@ public class Building implements Serializable {
    */
   @Override
   public boolean equals(Object object) {
+    if (object == null) {
+      return false;
+    }
+
     if (buildingNumber == ((Building) object).buildingNumber) {
       return true;
     }
 
     return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
   }
 
   /*

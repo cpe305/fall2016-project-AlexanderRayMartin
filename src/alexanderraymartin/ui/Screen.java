@@ -33,7 +33,7 @@ public class Screen extends JFrame {
 
   private static final long serialVersionUID = 1L;
 
-  private static final String fontTitle = "Courier";
+  private static final String FONT_TITLE = "Courier";
 
   /**
    * The UI width.
@@ -111,7 +111,7 @@ public class Screen extends JFrame {
    * Creates the interface.
    */
   public void createInterface() {
-    final Font buttonFont = new Font(fontTitle, Font.PLAIN, 20);
+    final Font buttonFont = new Font(FONT_TITLE, Font.PLAIN, 20);
     final Dimension buttonSize = new Dimension(175, 50);
 
     removeClassButtons = new ArrayList<>();
@@ -132,7 +132,7 @@ public class Screen extends JFrame {
     classPanel.add(classNamePanel);
 
     scheduleLabel = new JLabel("Schedule");
-    scheduleLabel.setFont(new Font(fontTitle, Font.BOLD, 50));
+    scheduleLabel.setFont(new Font(FONT_TITLE, Font.BOLD, 50));
     schedulePanel.add(scheduleLabel);
 
     addClass = new JButton("Add");
@@ -172,7 +172,7 @@ public class Screen extends JFrame {
    * Creates the interface for editor mode.
    */
   public void createEditorInterface() {
-    final Font buttonFont = new Font(fontTitle, Font.PLAIN, 20);
+    final Font buttonFont = new Font(FONT_TITLE, Font.PLAIN, 20);
     final Dimension buttonSize = new Dimension(175, 50);
     editorSave = new JButton("Export");
     editorSave.setFont(buttonFont);
@@ -185,7 +185,7 @@ public class Screen extends JFrame {
   }
 
   private void addClass(int index) {
-    Font buttonFont = new Font(fontTitle, Font.PLAIN, 20);
+    Font buttonFont = new Font(FONT_TITLE, Font.PLAIN, 20);
     Dimension buttonSize = new Dimension(125, 20);
 
     removeClassButtons.add(new JButton("X"));
@@ -207,20 +207,6 @@ public class Screen extends JFrame {
     for (int i = 0; i < classLabels.size(); i++) {
       classLabels.get(i).setForeground(new Color(0x0000ff << (i * 5)));
     }
-  }
-
-  /**
-   * Checks if the mouse click is in the boundary.
-   * 
-   * @param ycoord The y coordinate of the mouse.
-   * @param xcoord The x coordinate of the mouse.
-   * @return True if in bounds, else false.
-   */
-  private boolean inBoundary(int ycoord, int xcoord) {
-    if (ycoord < 0 || ycoord >= graph.getRows() || xcoord < 0 || xcoord >= graph.getCols()) {
-      return false;
-    }
-    return true;
   }
 
   /**
@@ -385,6 +371,20 @@ public class Screen extends JFrame {
           graph.setNode(xcoord, ycoord, Map.BLOCKED);
         }
       }
+    }
+
+    /**
+     * Checks if the mouse click is in the boundary.
+     * 
+     * @param ycoord The y coordinate of the mouse.
+     * @param xcoord The x coordinate of the mouse.
+     * @return True if in bounds, else false.
+     */
+    private boolean inBoundary(int ycoord, int xcoord) {
+      if (ycoord < 0 || ycoord >= graph.getRows() || xcoord < 0 || xcoord >= graph.getCols()) {
+        return false;
+      }
+      return true;
     }
   }
 }

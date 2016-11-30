@@ -123,7 +123,7 @@ public class Building implements Serializable {
 
   @Override
   public int hashCode() {
-    return super.hashCode();
+    return 0;
   }
 
   /*

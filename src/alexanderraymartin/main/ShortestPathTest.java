@@ -50,20 +50,20 @@ public class ShortestPathTest extends Applet {
   private boolean victory;
 
   // initial size of maze - if bigger may go off window
-  private static final int maxRows = 20;
-  private static final int maxCols = 30;
-  private static final int winAmount = 8;
+  private static final int MAX_ROWS = 20;
+  private static final int MAX_COLS = 30;
+  private static final int WIN_AMOUNT = 8;
   // size of each block in pixels
-  private static final int blkSize = 20;
+  private static final int BLOCK_SIZE = 20;
 
   // color numbers for file
-  private static final int black = -1;
-  private static final int white = 0;
-  private static final int yellow = 1;
-  private static final int green = 2;
-  private static final int red = 3;
+  private static final int BLACK = -1;
+  private static final int WHITE = 0;
+  private static final int YELLOW = 1;
+  private static final int GREEN = 2;
+  private static final int RED = 3;
 
-  private static final String messageTip =
+  private static final String MESSAGE_TIP =
       "TIP: 'Test Mode' allows you to replace the start and end blocks using the mouse buttons!";
   // inner class that displays the maze
   private MazeCanvas mazeField;
@@ -132,7 +132,7 @@ public class ShortestPathTest extends Applet {
     goButton = new JButton("Go");
     goPanel.add(goButton);
 
-    pathLength = new JLabel(messageTip);
+    pathLength = new JLabel(MESSAGE_TIP);
     pathLengthPanel.add(pathLength);
 
     fileButton.addActionListener(buttonListener);
@@ -170,8 +170,8 @@ public class ShortestPathTest extends Applet {
       pathLength.setText("No path is available!");
       victory = false;
       return -1; // escape value
-    } else if (graph.fewestEdgePath(currentLocation, stopLocation) <= winAmount) {
-      pathLength.setText("Congratulations, you are within " + winAmount + " spaces of the goal!");
+    } else if (graph.fewestEdgePath(currentLocation, stopLocation) <= WIN_AMOUNT) {
+      pathLength.setText("Congratulations, you are within " + WIN_AMOUNT + " spaces of the goal!");
       victory = true;
     } else {
       pathLength.setText("Path Length: " + graph.fewestEdgePath(currentLocation, stopLocation));
@@ -192,36 +192,21 @@ public class ShortestPathTest extends Applet {
     for (int y = 0; y < rows; y++) {
       for (int x = 0; x < cols; x++) {
         if (maze[y][x] == color) {
-          maze[y][x] = white;
+          maze[y][x] = WHITE;
           mazeField.paintSingle(y, x, mazeField.getGraphics());
         }
       }
     }
   }
 
-  private void placeColor(int ycoord, int xcoord, int color) { // places a single color
-    removeColor(color);
-    maze[ycoord][xcoord] = color;
-    mazeField.paintSingle(ycoord, xcoord, mazeField.getGraphics());
-  }
-
   private void drawPath(int[] shortestPath) { // draw the shortest path
     if (!needLocations && getMessage() != -1) {
       for (int i = 0; i < shortestPath.length - 1; i++) {
         if (shortestPath[i] != currentLocation && shortestPath[i] != stopLocation) {
-          replaceBlock(shortestPath[i], yellow);
+          replaceBlock(shortestPath[i], YELLOW);
         }
       }
     }
-  }
-
-  private void removeEdges(int location) { // removes old edges
-    int ycoord = location / cols;
-    int xcoord = location % cols;
-    graph.removeEdge((ycoord - 1) * cols + xcoord, ycoord * cols + xcoord); // above
-    graph.removeEdge((ycoord + 1) * cols + xcoord, ycoord * cols + xcoord); // below
-    graph.removeEdge(ycoord * cols + (xcoord - 1), ycoord * cols + xcoord); // left
-    graph.removeEdge(ycoord * cols + (xcoord + 1), ycoord * cols + xcoord); // right
   }
 
   private boolean inBoundary(int ycoord, int xcoord) { // return true if valid area
@@ -232,10 +217,8 @@ public class ShortestPathTest extends Applet {
   }
 
   private void checkEdge(int ycoord, int xcoord, int y0, int x0) {
-    if (inBoundary(ycoord, xcoord)) { // check boundary
-      if (maze[ycoord][xcoord] != black) {
-        graph.addEdge(y0 * cols + x0, ycoord * cols + xcoord);
-      }
+    if (inBoundary(ycoord, xcoord) && maze[ycoord][xcoord] != BLACK) {
+      graph.addEdge(y0 * cols + x0, ycoord * cols + xcoord);
     }
   }
 
@@ -243,7 +226,7 @@ public class ShortestPathTest extends Applet {
     graph = new Graph(rows, cols);
     for (int y = 0; y < rows; y++) {
       for (int x = 0; x < cols; x++) {
-        if (maze[y][x] != black) {
+        if (maze[y][x] != BLACK) {
           checkEdge(y - 1, x, y, x); // above
           checkEdge(y + 1, x, y, x); // below
           checkEdge(y, x - 1, y, x); // left
@@ -287,6 +270,12 @@ public class ShortestPathTest extends Applet {
 
   // this object is triggered whenever a button is clicked
   private class ButtonActionListener implements ActionListener {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+     */
+    @Override
     public void actionPerformed(ActionEvent event) {
 
       Object source = event.getSource();
@@ -296,7 +285,7 @@ public class ShortestPathTest extends Applet {
         pathState = State.DISPLAY_SHORTEST_PATH;
         location = State.NEED_START;
         needLocations = true;
-        pathLength.setText(messageTip);
+        pathLength.setText(MESSAGE_TIP);
         makeMaze(fileName);
       } else if (source == goButton && !needLocations) {
         advanceLocation();
@@ -312,39 +301,46 @@ public class ShortestPathTest extends Applet {
 
         switch (pathState) {
           case DISPLAY_SHORTEST_PATH: // shows the shortest path
-            removeColor(yellow);
+            removeColor(YELLOW);
             drawPath(shortestPath);
             pathState = State.ADVANCE;
             getMessage(); // update message
             break;
           case ADVANCE: // moves along path
-
-            replaceBlock(currentLocation, white);
+            replaceBlock(currentLocation, WHITE);
             currentLocation = shortestPath[0];
-            replaceBlock(currentLocation, green);
+            replaceBlock(currentLocation, GREEN);
             pathState = State.ADD_BLOCK;
             getMessage(); // update message
             break;
           case ADD_BLOCK:// add random block along path
-
             float random = (float) Math.random();
             int index = Math.round((shortestPath.length - 1) * random);
-            int location = shortestPath[index];
+            int blockLocation = shortestPath[index];
             if (shortestPath[index] == stopLocation) {
-              location = shortestPath[index - 1]; // upper bound
+              blockLocation = shortestPath[index - 1]; // upper bound
             }
             if (shortestPath[index] == currentLocation) {
-              location = shortestPath[index + 1]; // lower bound
+              blockLocation = shortestPath[index + 1]; // lower bound
             }
-            replaceBlock(location, black); // add block in path
+            replaceBlock(blockLocation, BLACK); // add block in path
             pathState = State.DISPLAY_SHORTEST_PATH;
-            removeEdges(location); // updates the graph
+            removeEdges(blockLocation); // updates the graph
             break;
           default:
             break;
 
         }
       }
+    }
+
+    private void removeEdges(int location) { // removes old edges
+      int ycoord = location / cols;
+      int xcoord = location % cols;
+      graph.removeEdge((ycoord - 1) * cols + xcoord, ycoord * cols + xcoord); // above
+      graph.removeEdge((ycoord + 1) * cols + xcoord, ycoord * cols + xcoord); // below
+      graph.removeEdge(ycoord * cols + (xcoord - 1), ycoord * cols + xcoord); // left
+      graph.removeEdge(ycoord * cols + (xcoord + 1), ycoord * cols + xcoord); // right
     }
   }
 
@@ -354,13 +350,19 @@ public class ShortestPathTest extends Applet {
      * 
      * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
      */
-    public void mouseClicked(MouseEvent event) {}
+    @Override
+    public void mouseClicked(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
 
     /*
      * (non-Javadoc)
      * 
      * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
      */
+    @Override
     public void mousePressed(MouseEvent event) {
 
       if (radioButton1.isSelected()) {
@@ -373,8 +375,8 @@ public class ShortestPathTest extends Applet {
       // upper-left is (0,0)
       int startX = event.getX();
       int startY = event.getY();
-      int xcoord = startX / blkSize;
-      int ycoord = startY / blkSize;
+      int xcoord = startX / BLOCK_SIZE;
+      int ycoord = startY / BLOCK_SIZE;
 
       if (inTestMode) {
         testMode(ycoord, xcoord, event); // test mode
@@ -389,51 +391,65 @@ public class ShortestPathTest extends Applet {
      * 
      * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
      */
-    public void mouseReleased(MouseEvent event) {}
+    @Override
+    public void mouseReleased(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
 
     /*
      * (non-Javadoc)
      * 
      * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
      */
-    public void mouseEntered(MouseEvent event) {}
+    @Override
+    public void mouseEntered(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
 
     /*
      * (non-Javadoc)
      * 
      * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
      */
-    public void mouseExited(MouseEvent event) {}
+    @Override
+    public void mouseExited(MouseEvent event) {
+      /*
+       * Not used.
+       */
+    }
 
     private void testMode(int ycoord, int xcoord, MouseEvent event) {
-      if (!needMaze && inBoundary(ycoord, xcoord)) {
-        if (maze[ycoord][xcoord] == white || maze[ycoord][xcoord] == yellow) {
-          pathState = State.ADVANCE;
-          if (event.getButton() == MouseEvent.BUTTON1) {
-            placeColor(ycoord, xcoord, green);
-            currentLocation = ycoord * cols + xcoord;
-          } else {
-            placeColor(ycoord, xcoord, red);
-            stopLocation = ycoord * cols + xcoord;
-            needLocations = false;
-          }
-          removeColor(yellow);
-          drawPath(graph.getPath(currentLocation, stopLocation));
+      if (!needMaze && inBoundary(ycoord, xcoord)
+          && (maze[ycoord][xcoord] == WHITE || maze[ycoord][xcoord] == YELLOW)) {
+        pathState = State.ADVANCE;
+        if (event.getButton() == MouseEvent.BUTTON1) {
+          placeColor(ycoord, xcoord, GREEN);
+          currentLocation = ycoord * cols + xcoord;
+        } else {
+          placeColor(ycoord, xcoord, RED);
+          stopLocation = ycoord * cols + xcoord;
+          needLocations = false;
         }
+        removeColor(YELLOW);
+        drawPath(graph.getPath(currentLocation, stopLocation));
       }
     }
 
     private void placeLocations(int ycoord, int xcoord) {
       if (!needMaze && needLocations && inBoundary(ycoord, xcoord)) {
-        if (maze[ycoord][xcoord] == white) {
+        if (maze[ycoord][xcoord] == WHITE) {
           switch (location) {
             case NEED_START:
-              placeColor(ycoord, xcoord, green);
+              placeColor(ycoord, xcoord, GREEN);
               currentLocation = ycoord * cols + xcoord;
               location = State.NEED_END;
               break;
             case NEED_END:
-              placeColor(ycoord, xcoord, red);
+              placeColor(ycoord, xcoord, RED);
               stopLocation = ycoord * cols + xcoord;
               location = State.NEED_START;
               needLocations = false;
@@ -444,6 +460,13 @@ public class ShortestPathTest extends Applet {
         }
       }
     }
+
+    private void placeColor(int ycoord, int xcoord, int color) { // places a single color
+      removeColor(color);
+      maze[ycoord][xcoord] = color;
+      mazeField.paintSingle(ycoord, xcoord, mazeField.getGraphics());
+    }
+
   }
 
   /**
@@ -458,10 +481,10 @@ public class ShortestPathTest extends Applet {
 
     // the constructor sets it up
     MazeCanvas() {
-      rows = maxRows;
-      cols = maxCols;
-      maze = new int[maxRows][maxCols];
-      setSize(cols * blkSize, rows * blkSize);
+      rows = MAX_ROWS;
+      cols = MAX_COLS;
+      maze = new int[MAX_ROWS][MAX_COLS];
+      setSize(cols * BLOCK_SIZE, rows * BLOCK_SIZE);
       setBackground(Color.white);
     }
 
@@ -482,23 +505,23 @@ public class ShortestPathTest extends Applet {
     public void paintSingle(int location, Graphics graphics) {
       int ycoord = location / cols;
       int xcoord = location % cols;
-      if (maze[ycoord][xcoord] == white) {
+      if (maze[ycoord][xcoord] == WHITE) {
         // location is clear
         graphics.setColor(Color.white);
-      } else if (maze[ycoord][xcoord] == black) {
+      } else if (maze[ycoord][xcoord] == BLACK) {
         // location is a wall
         graphics.setColor(Color.black);
-      } else if (maze[ycoord][xcoord] == yellow) {
+      } else if (maze[ycoord][xcoord] == YELLOW) {
         // path - yellow
         graphics.setColor(Color.yellow);
-      } else if (maze[ycoord][xcoord] == green) {
+      } else if (maze[ycoord][xcoord] == GREEN) {
         // start location - green
         graphics.setColor(Color.green);
-      } else if (maze[ycoord][xcoord] == red) {
+      } else if (maze[ycoord][xcoord] == RED) {
         // end location - red
         graphics.setColor(Color.red);
       }
-      graphics.fillRect(xcoord * blkSize, ycoord * blkSize, blkSize, blkSize);
+      graphics.fillRect(xcoord * BLOCK_SIZE, ycoord * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
     }
 
     /*
@@ -509,28 +532,28 @@ public class ShortestPathTest extends Applet {
     @Override
     public void paint(Graphics graphics) { // paints entire canvas
       graphics.setColor(Color.white);
-      graphics.fillRect(0, 0, cols * blkSize, rows * blkSize);
+      graphics.fillRect(0, 0, cols * BLOCK_SIZE, rows * BLOCK_SIZE);
 
       for (int y = 0; y < rows; y++) {
         for (int x = 0; x < cols; x++) {
-          if (maze[y][x] == white) {
+          if (maze[y][x] == WHITE) {
             // location is clear
             graphics.setColor(Color.white);
-          } else if (maze[y][x] == black) {
+          } else if (maze[y][x] == BLACK) {
             // location is a wall
             graphics.setColor(Color.black);
-          } else if (maze[y][x] == yellow) {
+          } else if (maze[y][x] == YELLOW) {
             // path - yellow
             graphics.setColor(Color.yellow);
-          } else if (maze[y][x] == green) {
+          } else if (maze[y][x] == GREEN) {
             // start location - green
             graphics.setColor(Color.green);
-          } else if (maze[y][x] == red) {
+          } else if (maze[y][x] == RED) {
             // end location - red
             graphics.setColor(Color.red);
           }
           // draw the location
-          graphics.fillRect(x * blkSize, y * blkSize, blkSize, blkSize);
+          graphics.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
         }
       }
     }

@@ -181,7 +181,6 @@ public class Graph {
       fw.close();
     } catch (IOException exception) {
       Main.getLogger().log(Level.FINE, "Exception", exception);
-      exception.printStackTrace();
     }
   }
 
@@ -216,7 +215,6 @@ public class Graph {
       bufferedReader.close();
     } catch (IOException exception) {
       Main.getLogger().log(Level.FINE, "Exception", exception);
-      exception.printStackTrace();
     }
     return array;
   }

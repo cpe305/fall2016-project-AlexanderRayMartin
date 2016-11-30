@@ -16,7 +16,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class Main {
 
-  public static Logger log;
+  private static Logger log;
 
   /**
    * @param args Command line arguments.

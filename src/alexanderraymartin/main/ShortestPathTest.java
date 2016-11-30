@@ -440,23 +440,22 @@ public class ShortestPathTest extends Applet {
     }
 
     private void placeLocations(int ycoord, int xcoord) {
-      if (!needMaze && needLocations && inBoundary(ycoord, xcoord)) {
-        if (maze[ycoord][xcoord] == WHITE) {
-          switch (location) {
-            case NEED_START:
-              placeColor(ycoord, xcoord, GREEN);
-              currentLocation = ycoord * cols + xcoord;
-              location = State.NEED_END;
-              break;
-            case NEED_END:
-              placeColor(ycoord, xcoord, RED);
-              stopLocation = ycoord * cols + xcoord;
-              location = State.NEED_START;
-              needLocations = false;
-              break;
-            default:
-              break;
-          }
+      if (!needMaze && needLocations && inBoundary(ycoord, xcoord)
+          && maze[ycoord][xcoord] == WHITE) {
+        switch (location) {
+          case NEED_START:
+            placeColor(ycoord, xcoord, GREEN);
+            currentLocation = ycoord * cols + xcoord;
+            location = State.NEED_END;
+            break;
+          case NEED_END:
+            placeColor(ycoord, xcoord, RED);
+            stopLocation = ycoord * cols + xcoord;
+            location = State.NEED_START;
+            needLocations = false;
+            break;
+          default:
+            break;
         }
       }
     }

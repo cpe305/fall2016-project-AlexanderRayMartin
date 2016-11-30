@@ -50,7 +50,6 @@ public class Screen extends JFrame {
    * Node size.
    */
   public static final int NODE_SIZE = 20;
-
   /**
    * The map for the screen.
    */

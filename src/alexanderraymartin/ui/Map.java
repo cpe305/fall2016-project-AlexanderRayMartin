@@ -1,5 +1,6 @@
 package alexanderraymartin.ui;
 
+import alexanderraymartin.main.Main;
 import alexanderraymartin.main.MapEditor;
 import alexanderraymartin.searchalgorithm.Graph;
 
@@ -125,6 +126,7 @@ public class Map extends JPanel {
     try {
       image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(fileName));
     } catch (IOException exception) {
+      Main.getLogger().fine("Exception!");
       exception.printStackTrace();
     }
 

@@ -276,6 +276,7 @@ public class ShortestPathTest extends Applet {
       makeGraph(); // make the graph
       return true;
     } catch (Exception exception) {
+      Main.getLogger().fine("Exception!");
       pathLength.setText("Error: File not found or error in file!");
       needMaze = true;
       needLocations = true;

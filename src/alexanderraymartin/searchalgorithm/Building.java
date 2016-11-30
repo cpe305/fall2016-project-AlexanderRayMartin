@@ -1,5 +1,7 @@
 package alexanderraymartin.searchalgorithm;
 
+import alexanderraymartin.main.Main;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
@@ -95,6 +97,7 @@ public class Building implements Serializable {
       }
       bufferedReader.close();
     } catch (IOException exception) {
+      Main.getLogger().fine("Exception!");
       exception.printStackTrace();
     }
   }

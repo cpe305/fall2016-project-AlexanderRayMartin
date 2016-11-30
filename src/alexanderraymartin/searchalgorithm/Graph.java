@@ -25,7 +25,7 @@ public class Graph {
   /**
    * Path for the text file containing the map node information.
    */
-  private static final String mapNodeFile = "mapNode.txt";
+  private static final String MAP_NODE_FILE = "mapNode.txt";
   /**
    * Adjacency matrix.
    */
@@ -136,7 +136,7 @@ public class Graph {
   }
 
   private int[][] createNodes() {
-    int[] array = getArray(openFile(mapNodeFile));
+    int[] array = getArray(openFile(MAP_NODE_FILE));
     int index = 2;
     this.rows = array[0];
     this.cols = array[1];

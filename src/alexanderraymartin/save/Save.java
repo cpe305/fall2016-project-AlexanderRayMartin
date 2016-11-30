@@ -73,7 +73,7 @@ public class Save {
     try {
       FileInputStream fileInputStream = new FileInputStream(DIRECTORY + SAVE_PATH);
       ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
-      Schedule.getInstance().setSchedule((Schedule) inputStream.readObject());
+      Schedule.setSchedule((Schedule) inputStream.readObject());
       inputStream.close();
       fileInputStream.close();
     } catch (IOException | ClassNotFoundException exception) {
@@ -88,13 +88,11 @@ public class Save {
    */
   private void createDirectory() {
     File file = new File(DIRECTORY);
-    {
-      if (!file.exists()) {
-        Main.getLogger().fine("Creating: " + file);
-        boolean successful = file.mkdirs();
-        if (successful) {
-          Main.getLogger().fine("Folders created!");
-        }
+    if (!file.exists()) {
+      Main.getLogger().fine("Creating: " + file);
+      boolean successful = file.mkdirs();
+      if (successful) {
+        Main.getLogger().fine("Folders created!");
       }
     }
   }

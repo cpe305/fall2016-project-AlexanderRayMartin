@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
 
 /**
  * @author Alex Martin.
@@ -57,7 +58,7 @@ public class Save {
       outputStream.close();
       fileOutputStream.close();
     } catch (IOException exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       exception.printStackTrace();
     }
   }
@@ -77,7 +78,7 @@ public class Save {
       inputStream.close();
       fileInputStream.close();
     } catch (IOException | ClassNotFoundException exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       exception.printStackTrace();
       Main.getLogger().fine("Corrupted save file");
       saveSchedule();

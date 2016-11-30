@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -126,7 +127,7 @@ public class Map extends JPanel {
     try {
       image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(fileName));
     } catch (IOException exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       exception.printStackTrace();
     }
 

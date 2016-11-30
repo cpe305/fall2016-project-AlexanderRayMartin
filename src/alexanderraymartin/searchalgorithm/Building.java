@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * @author Alex Martin.
@@ -97,7 +98,7 @@ public class Building implements Serializable {
       }
       bufferedReader.close();
     } catch (IOException exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       exception.printStackTrace();
     }
   }

@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
 
 /**
  * @author Alex Martin.
@@ -83,7 +84,7 @@ public class MapEditor {
       bw.close();
       fw.close();
     } catch (IOException exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       exception.printStackTrace();
     }
   }

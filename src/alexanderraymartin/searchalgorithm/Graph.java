@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
 
 /**
  * @author Alex Martin.
@@ -179,7 +180,7 @@ public class Graph {
       bw.close();
       fw.close();
     } catch (IOException exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       exception.printStackTrace();
     }
   }
@@ -214,7 +215,7 @@ public class Graph {
       array = arrayList.stream().mapToInt(i -> i).toArray();
       bufferedReader.close();
     } catch (IOException exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       exception.printStackTrace();
     }
     return array;

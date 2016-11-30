@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -276,7 +277,7 @@ public class ShortestPathTest extends Applet {
       makeGraph(); // make the graph
       return true;
     } catch (Exception exception) {
-      Main.getLogger().info(exception.toString());
+      Main.getLogger().log(Level.FINE, "Exception", exception);
       pathLength.setText("Error: File not found or error in file!");
       needMaze = true;
       needLocations = true;

@@ -46,7 +46,7 @@ public class Screen extends JFrame {
   /**
    * Array containing the hex values for predefined colors.
    */
-  public static final int[] COLORS = new int[] {RED, BLUE, ORANGE, GREEN, PURPLE, TEAL, PINK};
+  protected static final int[] COLORS = new int[] {RED, BLUE, ORANGE, GREEN, PURPLE, TEAL, PINK};
 
   /**
    * The UI width.

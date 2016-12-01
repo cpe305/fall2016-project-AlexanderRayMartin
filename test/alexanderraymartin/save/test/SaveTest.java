@@ -4,7 +4,7 @@ import alexanderraymartin.save.Save;
 
 import org.junit.Test;
 
-public class TestSave {
+public class SaveTest {
 
   @Test
   public void test() {

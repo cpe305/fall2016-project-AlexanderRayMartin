@@ -106,7 +106,7 @@ public class Map extends JPanel {
     for (int i = 0; i < Graph.getBuildingNodes().size(); i++) {
       int xcoord = Graph.getBuildingNodes().get(i) % graph.getCols();
       int ycoord = Graph.getBuildingNodes().get(i) / graph.getCols();
-      drawSquare(graphics, new Color(0x0000ff << (i * 5)), xcoord, ycoord);
+      drawSquare(graphics, new Color(Screen.COLORS[i % Screen.COLORS.length]), xcoord, ycoord);
     }
   }
 

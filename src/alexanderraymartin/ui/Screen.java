@@ -34,6 +34,20 @@ public class Screen extends JFrame {
   private static final long serialVersionUID = 1L;
 
   private static final String FONT_TITLE = "Courier";
+
+  private static final int RED = 0xe81919;
+  private static final int BLUE = 0x427af4;
+  private static final int ORANGE = 0xff6600;
+  private static final int GREEN = 0x018c2b;
+  private static final int PURPLE = 0xa442f4;
+  private static final int TEAL = 0x18c8c;
+  private static final int PINK = 0xf442c2;
+
+  /**
+   * Array containing the hex values for predefined colors.
+   */
+  public static final int[] COLORS = new int[] {RED, BLUE, ORANGE, GREEN, PURPLE, TEAL, PINK};
+
   /**
    * The UI width.
    */
@@ -203,7 +217,7 @@ public class Screen extends JFrame {
 
   private void setLabelColor() {
     for (int i = 0; i < classLabels.size(); i++) {
-      classLabels.get(i).setForeground(new Color(0x0000ff << (i * 5)));
+      classLabels.get(i).setForeground(new Color(COLORS[i % COLORS.length]));
     }
   }
 

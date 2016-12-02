@@ -159,7 +159,7 @@ public class Building implements Serializable {
       temp = name.substring(0, length - buildingNumber.length());
       temp = temp + "...";
     } else if (name.length() < length) {
-      temp = String.format(temp + "%" + length + "s", "");
+      temp = String.format("%s%25s", temp, "");
     }
     return buildingNumber + " " + temp;
   }
